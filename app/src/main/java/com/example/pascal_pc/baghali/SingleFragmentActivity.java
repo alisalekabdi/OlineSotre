@@ -22,11 +22,11 @@ public abstract class SingleFragmentActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-
-        if (fragmentManager.findFragmentById(R.id.fragment_list_container) == null) {
-            fragmentManager.beginTransaction()
-                    .add(R.id.fragment_list_container, createFragment())
-                    .commit();
-        }
+//
+//        if (fragmentManager.findFragmentById(R.id.fragment_list_container) == null) {
+//            fragmentManager.beginTransaction()
+//                    .add(R.id.fragment_list_container, createFragment())
+//                    .commit();
+//        }
     }
 }

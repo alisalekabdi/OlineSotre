@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class Prodcts {
+public class Product {
 
     @SerializedName("images")
     private List<Image> mImages;
@@ -18,7 +18,7 @@ public class Prodcts {
     private String rating_count;
     private String total_sales;
 
-    public Prodcts(List<Image> images, String name, String price, int id,
+    public Product(List<Image> images, String name, String price, int id,
                    String description, String createdDate, String average_rating,
                    String rating_count, String total_sales) {
         mImages = images;

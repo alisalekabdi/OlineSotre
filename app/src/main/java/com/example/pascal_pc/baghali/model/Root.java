@@ -4,13 +4,13 @@ import java.util.List;
 
 public class Root {
 
-    private List<Prodcts> mProdcts;
+    private List<Product> mProdcts;
 
-    public Root(List<Prodcts> prodcts) {
+    public Root(List<Product> prodcts) {
         mProdcts = prodcts;
     }
 
-    public List<Prodcts> getProdcts() {
+    public List<Product> getProdcts() {
         return mProdcts;
     }
 }
