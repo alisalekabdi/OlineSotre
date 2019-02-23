@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
-import com.example.pascal_pc.baghali.model.Product;
+import com.example.pascal_pc.baghali.model.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -67,7 +66,7 @@ public class ProductListViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_list_view, container, false);
         mProductRecyclerView = view.findViewById(R.id.product_list_recycler_view);
         mProductRecyclerView.setLayoutManager(new
-                LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
+                LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         /**
          * req_id=1-->for newest list
          * req_id=2-->for popular list

@@ -1,5 +1,7 @@
 package com.example.pascal_pc.baghali.model;
 
+import com.example.pascal_pc.baghali.model.product.Product;
+
 import java.util.List;
 
 public class Root {

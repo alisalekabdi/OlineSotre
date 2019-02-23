@@ -1,10 +1,9 @@
 package com.example.pascal_pc.baghali;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
-import com.example.pascal_pc.baghali.model.*;
 
+import com.example.pascal_pc.baghali.model.product.Image;
+import com.example.pascal_pc.baghali.model.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -76,47 +75,51 @@ public class ProductInfFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_product_info, container, false);
         findItem(view);
-        mRecyclerView.setLayoutManager(new GridLayoutManager(getActivity(),1));
-//        RetrofitClientInstance.getRetrofitInstance()
-//                .create(Api.class)
-//                .getProduct(mProductId)
-//                .enqueue(new Callback<Product>() {
-//                    @Override
-//                    public void onResponse(Call<Product> call, Response<Product> response) {
-//                        if(response.isSuccessful()){
-//                            Product product=response.body();
-//                            if(mAdapter==null){
-//                                mAdapter=new ImagesAdapter(product.getImages());
-//                            }else{
-//                                mAdapter.setImageList(product.getImages());
-//                                mAdapter.notifyDataSetChanged();
-//                            }
-//                            mTitle.setText("Title :\t"+product.getName());
-//                            mPrice.setText("Price :"+product.getPrice());
-////                            mColorTv.setText("Color: "+product.get);
-//                            // TODO: 2/18/2019 get colorList and set them with suitable component
-//                            mTotalSales.setText("Total sells :\t"+product.getTotal_sales());
-//                            mRatingCount.setText("Rating count: \t"+product.getRating_count());
-//                            mRatingBar.setRating(Float.valueOf(product.getAverage_rating()));
-//                            mDescription.setText("Description :\t"+product.getDescription());
+        mRecyclerView.setLayoutManager(new
+                LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true));
+        RetrofitClientInstance.getRetrofitInstance()
+                .create(Api.class)
+                .getProduct(mProductId)
+                .enqueue(new Callback<Product>() {
+                    @Override
+                    public void onResponse(Call<Product> call, Response<Product> response) {
+                        if(response.isSuccessful()){
+                            Product product=response.body();
+                            if(mAdapter==null){
+                                mAdapter=new ImagesAdapter(product.getImages());
+                                mRecyclerView.setAdapter(mAdapter);
+                            }else{
+                                mAdapter.setImageList(product.getImages());
+                                mAdapter.notifyDataSetChanged();
+                            }
+                            mTitle.setText("Name :\t"+product.getName());
+                            mPrice.setText("Price :\t"+product.getPrice());
+//                            mColorTv.setText("Color: "+product.get);
+                            // TODO: 2/18/2019 get colorList and set them with suitable component
+                            mTotalSales.setText("Total sale:"+product.getTotal_sales());
+                            mRatingCount.setText("Rating count:\n"+product.getRating_count());
+                            mRatingBar.setRating(Float.valueOf(product.getAverage_rating()));
+                            mDescription.setText(product.getDescription());
+                            // TODO: 2/19/2019 show 
 
 
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<Product> call, Throwable t) {
-//                        final Snackbar snackbar=Snackbar.make(view,
-//                                getResources().getString(R.string.failed_message), Snackbar.LENGTH_INDEFINITE);
-//                        snackbar.setAction("OK", new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                snackbar.dismiss();
-//                            }
-//                        });
-//                        snackbar.show();
-//                    }
-//                });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Product> call, Throwable t) {
+                        final Snackbar snackbar=Snackbar.make(view,
+                                getResources().getString(R.string.failed_message), Snackbar.LENGTH_INDEFINITE);
+                        snackbar.setAction("OK", new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                ProductInfFragment.this.onResume();
+                                snackbar.dismiss();
+                            }
+                        });
+                        snackbar.show();
+                    }
+                });
 
         return view;
     }
@@ -148,7 +151,7 @@ public class ProductInfFragment extends Fragment {
 
         @Override
         public ImagesHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view=LayoutInflater.from(getActivity()).inflate(R.layout.image_item_view,parent);
+            View view=LayoutInflater.from(getActivity()).inflate(R.layout.image_item_view,parent,false);
             ImagesHolder holder=new ImagesHolder(view);
             return holder;
         }

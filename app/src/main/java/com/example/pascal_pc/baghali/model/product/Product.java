@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali.model;
+package com.example.pascal_pc.baghali.model.product;
 
 import com.google.gson.annotations.SerializedName;
 

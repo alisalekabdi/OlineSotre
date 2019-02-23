@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <group android:checkableBehavior="all"
+        android:id="@+id/gr1">
+        <item android:title="home"
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_home"
+            />
+        <item android:title="Product list"
+            android:id="@+id/nav_product_list"
+            android:icon="@drawable/ic_action_product_list"/>
+    </group>
+
+
+    <group android:checkableBehavior="single"
+        android:id="@+id/gr4">
+
+        <item
+            android:id="@+id/tab_shopping"
+            android:icon="@drawable/ic_shopping"
+            android:title="@string/basket" />
+
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/gr2">
+        <item
+            android:id="@+id/nav_recent"
+            android:icon="@drawable/ic_action_open"
+            android:title="Recent" />
+        <item
+            android:id="@+id/nav_popular"
+            android:icon="@drawable/ic_action_open"
+            android:title="Popular" />
+        <item
+            android:id="@+id/nav_best_sell"
+            android:icon="@drawable/ic_action_open"
+            android:title="Top Sell" />
+
+    </group>
+    <group android:checkableBehavior="single"
+        android:id="@+id/gr3">
+        <item
+            android:id="@+id/action_settings"
+            android:title="@string/action_settings"
+            android:icon="@drawable/ic_setting"
+            />
+        <item
+            android:id="@+id/about_market"
+            android:title="About us"
+            android:icon="@drawable/ic_about"/>
+    </group>
+
+
+
+</menu>
