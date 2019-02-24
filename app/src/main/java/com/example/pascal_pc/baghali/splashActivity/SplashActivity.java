@@ -6,7 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.airbnb.lottie.LottieAnimationView;
-import com.example.pascal_pc.baghali.BaghalActivity;
+import com.example.pascal_pc.baghali.controller.BaghalActivity;
 import com.example.pascal_pc.baghali.R;
 
 public class SplashActivity extends AppCompatActivity {

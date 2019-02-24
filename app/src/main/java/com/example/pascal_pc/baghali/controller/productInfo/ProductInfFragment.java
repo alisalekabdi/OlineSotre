@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali;
+package com.example.pascal_pc.baghali.controller.productInfo;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
 
+import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.model.product.Image;
 import com.example.pascal_pc.baghali.model.product.Product;
 import com.squareup.picasso.Picasso;

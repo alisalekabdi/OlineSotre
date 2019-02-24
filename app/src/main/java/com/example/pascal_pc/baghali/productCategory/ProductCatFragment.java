@@ -17,9 +17,10 @@ import android.widget.Toast;
 
 import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
-import com.example.pascal_pc.baghali.ProductInfoActivity;
+import com.example.pascal_pc.baghali.controller.productInfo.ProductInfoActivity;
 import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.model.product.Product;
+import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -33,15 +34,17 @@ import retrofit2.Response;
  */
 public class ProductCatFragment extends Fragment {
 
-    private static final String CATEGORY_ID ="category_id";
+    private static final String CATEGORY_ID = "category_id";
     private String mCategoryId;
+    private CatAdapter adapter;
     private RecyclerView mRecyclerView;
+    private IndefinitePagerIndicator mRecyclerViewIndicator;
 
 
     public static ProductCatFragment newInstance(String catId) {
 
         Bundle args = new Bundle();
-        args.putString(CATEGORY_ID,catId);
+        args.putString(CATEGORY_ID, catId);
         ProductCatFragment fragment = new ProductCatFragment();
         fragment.setArguments(args);
         return fragment;
@@ -55,26 +58,36 @@ public class ProductCatFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mCategoryId=getArguments().getString(mCategoryId);
+        mCategoryId = getArguments().getString(CATEGORY_ID);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_product_cat, container, false);
-        mRecyclerView=view.findViewById(R.id.specific_cat_recycler_view);
+        View view = inflater.inflate(R.layout.fragment_product_cat, container, false);
+        mRecyclerView = view.findViewById(R.id.specific_cat_recycler_view);
+        mRecyclerViewIndicator=view.findViewById(R.id.img_indicator_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
-                LinearLayoutManager.VERTICAL,false));
+                LinearLayoutManager.VERTICAL, false));
+        mRecyclerViewIndicator.attachToRecyclerView(mRecyclerView);
         RetrofitClientInstance.getRetrofitInstance()
                 .create(Api.class)
                 .getProductWithCategory(mCategoryId)
                 .enqueue(new Callback<List<Product>>() {
                     @Override
                     public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if(response.isSuccessful()){
-                            CatAdapter adapter=new CatAdapter(response.body());
-                            mRecyclerView.setAdapter(adapter);
+                        if (response.isSuccessful()) {
+
+//                            Log.i(TAG, "catListSize\t" + String.valueOf(mCategoryId));
+                            if (adapter == null) {
+                                adapter = new CatAdapter(response.body());
+                                mRecyclerView.setAdapter(adapter);
+                            }else{
+                                adapter.setProducts(response.body());
+                                adapter.notifyDataSetChanged();
+                            }
+
                         }
                     }
 
@@ -87,6 +100,7 @@ public class ProductCatFragment extends Fragment {
 
         return view;
     }
+
     private class CatViewHolder extends RecyclerView.ViewHolder {
         private Product mProduct;
         private ImageView mProductItemImgView;
@@ -101,7 +115,7 @@ public class ProductCatFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=ProductInfoActivity.newIntent(getActivity(),mProduct.getId());
+                    Intent intent = ProductInfoActivity.newIntent(getActivity(), mProduct.getId());
                     startActivity(intent);
                 }
             });
@@ -118,7 +132,8 @@ public class ProductCatFragment extends Fragment {
             }
         }
     }
-    private class CatAdapter extends RecyclerView.Adapter<CatViewHolder>{
+
+    private class CatAdapter extends RecyclerView.Adapter<CatViewHolder> {
         private List<Product> mProducts;
 
         public CatAdapter(List<Product> products) {
@@ -132,7 +147,7 @@ public class ProductCatFragment extends Fragment {
         @NonNull
         @Override
         public CatViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view=LayoutInflater.from(getActivity()).inflate(R.layout.product_item_view,viewGroup,false);
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.product_item_view, viewGroup, false);
             return new CatViewHolder(view);
         }
 

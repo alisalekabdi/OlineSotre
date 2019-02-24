@@ -7,22 +7,20 @@
     android:layout_height="match_parent"
     tools:context=".productCategory.ProductCategoryActivity">
 
+
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout_category"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:isScrollContainer="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabBackground="@color/DarkRed"
-        app:tabIndicatorColor="@color/AliceBlue" />
-
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
+        android:scrollbarSize="2dp"
+        app:tabGravity="fill"
+        app:tabMode="scrollable"
+        android:background="@color/DarkRed"
+        app:tabTextColor="@color/Silver"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabIndicatorColor="@android:color/white">
+    </android.support.design.widget.TabLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"

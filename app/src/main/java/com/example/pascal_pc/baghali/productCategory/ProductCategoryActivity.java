@@ -25,7 +25,7 @@ import retrofit2.Response;
 
 public class ProductCategoryActivity extends AppCompatActivity {
 
-    private static final String TAG ="tag";
+    public static final String TAG = "tag";
     private ViewPager mViewPager;
     private List<ProductCatergory> prCatList;
     private TabLayout mTabLayout;
@@ -53,29 +53,20 @@ public class ProductCategoryActivity extends AppCompatActivity {
                     public void onResponse(Call<List<ProductCatergory>> call, Response<List<ProductCatergory>> response) {
 
                         if (response.isSuccessful()) {
-                            prCatList =response.body();
-                            Log.i(TAG, "catListSize\t"+String.valueOf(prCatList.size()));
-
-                            Log.i(TAG, "catListName\t"+prCatList.get(0).getName()+"\n"
-                                    +prCatList.get(1).getName()+"\n"
-                                    +prCatList.get(2).getName()+"\n"
-                                    +prCatList.get(3).getName()+"\n"
-                                    +prCatList.get(4).getName()+"\n"
-                                    +prCatList.get(5).getName()+"\n"
-                                    +prCatList.get(6).getName()+"\n"
-                                    +prCatList.get(7).getName()+"\n"
-                                    +prCatList.get(8).getName()+"\n"
-                            );
+                            prCatList = response.body();
+                            Log.i(TAG, "catListSize\t" + String.valueOf(prCatList.size()));
 
                             mViewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
                                 @Override
                                 public Fragment getItem(int i) {
+                                    Log.i(TAG, "catListSize\t" + String.valueOf(prCatList.get(i).getId()));
                                     return ProductCatFragment.newInstance(prCatList.get(i).getId());
                                 }
 
                                 @Nullable
                                 @Override
                                 public CharSequence getPageTitle(int position) {
+
                                     return prCatList.get(position).getName();
                                 }
 
@@ -94,7 +85,7 @@ public class ProductCategoryActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<List<ProductCatergory>> call, Throwable t) {
                         Toast.makeText(ProductCategoryActivity.this, "Request Failed", Toast.LENGTH_SHORT).show();
-                        Log.i(TAG, "ERROR PRODUCT LIST\n"+t.getMessage());
+                        Log.i(TAG, "ERROR PRODUCT LIST\n" + t.getMessage());
 
                     }
                 });

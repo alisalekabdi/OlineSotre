@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali;
+package com.example.pascal_pc.baghali.controller;
 
 
 import android.content.Intent;
@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
+import com.example.pascal_pc.baghali.R;
+import com.example.pascal_pc.baghali.controller.productInfo.ProductInfoActivity;
 import com.example.pascal_pc.baghali.model.product.Product;
 import com.squareup.picasso.Picasso;
 
@@ -64,6 +66,7 @@ public class ProductListViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_list_view, container, false);
+
         mProductRecyclerView = view.findViewById(R.id.product_list_recycler_view);
         mProductRecyclerView.setLayoutManager(new
                 LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));

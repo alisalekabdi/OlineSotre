@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali;
+package com.example.pascal_pc.baghali.controller;
 
 
 
@@ -15,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.productCategory.ProductCategoryActivity;
 
 
