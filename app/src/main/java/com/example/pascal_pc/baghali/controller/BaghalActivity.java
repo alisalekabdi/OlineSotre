@@ -1,7 +1,6 @@
 package com.example.pascal_pc.baghali.controller;
 
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -19,7 +18,8 @@ import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.productCategory.ProductCategoryActivity;
 
 
-public class BaghalActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class BaghalActivity extends AppCompatActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
     public static final int REQ_ID_NEWEST_PRODUCT = 1;
     public static final int REQ_ID_POPULAR_PRODUCT = 2;
     public static final int REQ_ID_MOST_SELL_PRODUCT = 3;
@@ -27,8 +27,8 @@ public class BaghalActivity extends AppCompatActivity implements NavigationView.
     private DrawerLayout drawer;
     private NavigationView navigationView;
 
-    public static Intent newIntent(Context context){
-        Intent intent=new Intent(context,BaghalActivity.class);
+    public static Intent newIntent(Context context) {
+        Intent intent = new Intent(context, BaghalActivity.class);
         return intent;
     }
 
@@ -42,14 +42,13 @@ public class BaghalActivity extends AppCompatActivity implements NavigationView.
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         navigationView = findViewById(R.id.nav_view);
-        drawer =  findViewById(R.id.drawer_layout);
+        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
-
 
 
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -77,7 +76,7 @@ public class BaghalActivity extends AppCompatActivity implements NavigationView.
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main,menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -85,11 +84,14 @@ public class BaghalActivity extends AppCompatActivity implements NavigationView.
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int menuItemId = menuItem.getItemId();
 
-        switch (menuItemId){
-            case R.id.nav_product_list :
-                Intent intent=ProductCategoryActivity.newIntent(BaghalActivity.this);
+        switch (menuItemId) {
+            case R.id.nav_product_list:
+                Intent intent = ProductCategoryActivity.newIntent(BaghalActivity.this);
                 startActivity(intent);
                 break;
+            case R.id.nav_home:
+                Intent intent1=BaghalActivity.newIntent(this);
+                startActivity(intent1);
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;

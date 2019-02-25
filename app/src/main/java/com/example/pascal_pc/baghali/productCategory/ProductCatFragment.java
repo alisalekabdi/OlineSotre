@@ -108,9 +108,9 @@ public class ProductCatFragment extends Fragment {
 
         public CatViewHolder(@NonNull View itemView) {
             super(itemView);
-            mProductItemImgView = itemView.findViewById(R.id.product_item_imageView);
-            mProductItemTitleTv = itemView.findViewById(R.id.product_item_title_tv);
-            mProductItemPriceTv = itemView.findViewById(R.id.product_item_price_tv);
+            mProductItemImgView = itemView.findViewById(R.id.card_view_item_img_view);
+            mProductItemTitleTv = itemView.findViewById(R.id.card_view_item_title);
+            mProductItemPriceTv = itemView.findViewById(R.id.card_view_item_price);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -147,7 +147,7 @@ public class ProductCatFragment extends Fragment {
         @NonNull
         @Override
         public CatViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-            View view = LayoutInflater.from(getActivity()).inflate(R.layout.product_item_view, viewGroup, false);
+            View view = LayoutInflater.from(getActivity()).inflate(R.layout.product_item_list_view, viewGroup, false);
             return new CatViewHolder(view);
         }
 
