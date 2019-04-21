@@ -2,8 +2,8 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:layout_editor_absoluteY="25dp">
 
     <android.support.design.card.MaterialCardView
@@ -29,7 +29,6 @@
     </android.support.design.card.MaterialCardView>
 
 
-
     <TextView
         android:id="@+id/product_item_title_tv"
         android:layout_width="250dp"
@@ -44,6 +43,7 @@
         android:text="TextView"
         android:textSize="14sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 

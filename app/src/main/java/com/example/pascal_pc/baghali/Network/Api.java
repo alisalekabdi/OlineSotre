@@ -42,5 +42,9 @@ public interface Api {
             "&consumer_secret=cs_92e419a6da8c4f6b7a6f60a5020b667ce49854ef")
     Call<List<Product>> getProductWithCategory(@Query("category")String productId);
 
+    @GET("products?" +
+            "consumer_key=ck_b45a5d66023bec9aec70b2d6d088e55bc11c0210" +
+            "&consumer_secret=cs_92e419a6da8c4f6b7a6f60a5020b667ce49854ef")
+    Call<List<Product>> getProductWithSearch(@Query("search")String searchString);
 
 }

@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali.productCategory;
+package com.example.pascal_pc.baghali.controller.productCategory;
 
 import android.content.Context;
 import android.content.Intent;
@@ -26,12 +26,14 @@ import retrofit2.Response;
 public class ProductCategoryActivity extends AppCompatActivity {
 
     public static final String TAG = "tag";
+    private static final String REQ_KEY ="request_key";
     private ViewPager mViewPager;
     private List<ProductCatergory> prCatList;
     private TabLayout mTabLayout;
 
-    public static Intent newIntent(Context context) {
+    public static Intent newIntent(Context context,int reqId) {
         Intent intent = new Intent(context, ProductCategoryActivity.class);
+        intent.putExtra(REQ_KEY,reqId);
         return intent;
     }
 
@@ -42,6 +44,9 @@ public class ProductCategoryActivity extends AppCompatActivity {
 
         mViewPager = findViewById(R.id.view_pager);
         mTabLayout = findViewById(R.id.tab_layout_category);
+
+
+        // TODO: 2/25/2019 get product list with req_key and set them in recycler view don't forgot it
 
 
         RetrofitClientInstance

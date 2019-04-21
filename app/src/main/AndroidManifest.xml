@@ -11,16 +11,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.BaghalActivity"/>
-        <activity android:name=".controller.productInfo.ProductInfoActivity"/>
-        <activity android:name=".productCategory.ProductCategoryActivity"/>
-        <activity android:name=".splashActivity.SplashActivity">
+        <activity android:name=".controller.BaghalActivity" />
+        <activity android:name=".controller.productInfo.ProductInfoActivity" />
+        <activity android:name=".controller.productCategory.ProductCategoryActivity" />
+        <activity android:name=".controller.splashActivity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".controller.searchProduct.SearchProductActivity"
+            android:label="@string/title_activity_search_product"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

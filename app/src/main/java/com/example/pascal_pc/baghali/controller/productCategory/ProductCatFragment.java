@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali.productCategory;
+package com.example.pascal_pc.baghali.controller.productCategory;
 
 
 import android.content.Intent;
@@ -20,7 +20,6 @@ import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
 import com.example.pascal_pc.baghali.controller.productInfo.ProductInfoActivity;
 import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.model.product.Product;
-import com.rbrooks.indefinitepagerindicator.IndefinitePagerIndicator;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -38,7 +37,6 @@ public class ProductCatFragment extends Fragment {
     private String mCategoryId;
     private CatAdapter adapter;
     private RecyclerView mRecyclerView;
-    private IndefinitePagerIndicator mRecyclerViewIndicator;
 
 
     public static ProductCatFragment newInstance(String catId) {
@@ -67,10 +65,9 @@ public class ProductCatFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_cat, container, false);
         mRecyclerView = view.findViewById(R.id.specific_cat_recycler_view);
-        mRecyclerViewIndicator=view.findViewById(R.id.img_indicator_rv);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),
                 LinearLayoutManager.VERTICAL, false));
-        mRecyclerViewIndicator.attachToRecyclerView(mRecyclerView);
+
         RetrofitClientInstance.getRetrofitInstance()
                 .create(Api.class)
                 .getProductWithCategory(mCategoryId)

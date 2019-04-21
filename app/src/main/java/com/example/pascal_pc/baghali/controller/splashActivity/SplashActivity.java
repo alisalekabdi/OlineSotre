@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali.splashActivity;
+package com.example.pascal_pc.baghali.controller.splashActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -28,6 +28,7 @@ public class SplashActivity extends AppCompatActivity {
                 mAnimationView.pauseAnimation();
                 Intent intent=BaghalActivity.newIntent(SplashActivity.this);
                 startActivity(intent);
+                SplashActivity.this.finish();
             }
         },3000);
     }
