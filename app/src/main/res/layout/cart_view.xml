@@ -51,8 +51,9 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="left|center"
+            android:paddingLeft="8dp"
             android:text="Total Cost"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="@color/Green"
             android:textSize="18sp" />
 
         <TextView
@@ -63,11 +64,11 @@
             android:gravity="right|center"
             android:paddingRight="16dp"
             android:text="TextView"
-            android:textColor="@android:color/holo_green_dark" />
+            android:textColor="@color/SlateGray" />
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/cart_item_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -80,15 +81,18 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2"></android.support.v7.widget.RecyclerView>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/finalize_your_purchase_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/Green"
-        android:text="خرید خود را نهایی کنید"
+        android:text="finalize your purchase"
+        android:textAllCaps="false"
         android:textColor="@color/White"
+        android:textSize="18sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
