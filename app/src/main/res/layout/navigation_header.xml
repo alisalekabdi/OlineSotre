@@ -11,11 +11,11 @@
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView"
+        android:id="@+id/add_user"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="4dp"
-        android:layout_marginLeft="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginBottom="8dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:src="@drawable/ic_person"
@@ -25,22 +25,22 @@
         app:layout_constraintVertical_bias="0.727" />
 
     <TextView
+        android:id="@+id/user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginEnd="116dp"
+        android:layout_marginRight="116dp"
         android:layout_marginBottom="8dp"
         android:padding="4dp"
-        android:text="@string/navigation_views"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/AliceBlue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
+        app:layout_constraintHorizontal_bias="0.013"
+        app:layout_constraintStart_toEndOf="@+id/add_user"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.783" />
 

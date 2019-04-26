@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -16,8 +17,10 @@ import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
 
 import com.example.pascal_pc.baghali.R;
+import com.example.pascal_pc.baghali.dataBase.CartLab;
 import com.example.pascal_pc.baghali.model.product.Image;
 import com.example.pascal_pc.baghali.model.product.Product;
+import com.example.pascal_pc.baghali.model.dataBaseModel.Cart;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -34,9 +37,10 @@ public class ProductInfFragment extends Fragment {
     private static final String PRODUCT_ID_KEY ="product_id";
     private int mProductId;
     private ImagesAdapter mAdapter;
+    private Button mAddToCart;
 
     private RecyclerView mRecyclerView;
-    private TextView mTitle,mPrice,mDescription,mTotalSales,mRatingCount,mColorTv;
+    private TextView mTitle,mPrice,mTotalSales,mRatingCount,mDescription;
     private RatingBar mRatingBar;
 
 
@@ -61,13 +65,15 @@ public class ProductInfFragment extends Fragment {
         mRatingCount=view.findViewById(R.id.rating_count_tv);
         mRatingBar = view.findViewById(R.id.product_ratingBar);
         mDescription = view.findViewById(R.id.description_tv);
-        mColorTv=view.findViewById(R.id.color_tv);
+        mAddToCart=view.findViewById(R.id.add_to_cart);
+
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mProductId = getArguments().getInt(PRODUCT_ID_KEY);
+
     }
 
     @Override
@@ -76,6 +82,15 @@ public class ProductInfFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_product_info, container, false);
         findItem(view);
+        mAddToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Cart cart=new Cart();
+                cart.setMProductId((long) mProductId);
+                cart.setMId((long)12);
+                CartLab.getInstance().addCart(cart);
+            }
+        });
         mRecyclerView.setLayoutManager(new
                 LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,true));
         RetrofitClientInstance.getRetrofitInstance()
@@ -96,13 +111,11 @@ public class ProductInfFragment extends Fragment {
                             mTitle.setText("Name :\t"+product.getName());
                             mPrice.setText("Price :\t"+product.getPrice());
 //                            mColorTv.setText("Color: "+product.get);
-                            // TODO: 2/18/2019 get colorList and set them with suitable component
-                            mTotalSales.setText("Total sale:"+product.getTotal_sales());
-                            mRatingCount.setText("Rating count:\n"+product.getRating_count());
+
+                            mTotalSales.setText("Total sale:\t"+product.getTotal_sales());
+                            mRatingCount.setText("Rating count:\t"+product.getRating_count());
                             mRatingBar.setRating(Float.valueOf(product.getAverage_rating()));
                             mDescription.setText(product.getDescription());
-                            // TODO: 2/19/2019 show 
-
 
                         }
                     }

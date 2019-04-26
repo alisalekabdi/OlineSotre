@@ -1,3 +1,4 @@
+apply plugin: 'org.greenrobot.greendao'
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
@@ -42,4 +43,11 @@ dependencies {
     implementation 'com.airbnb.android:lottie:2.2.0'
     implementation 'de.hdodenhof:circleimageview:3.0.0'
     implementation 'com.ryanjeffreybrooks:indefinitepagerindicator:1.0.10'
+
+    implementation 'org.greenrobot:greendao:3.2.2'
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.4'
+
+    implementation 'com.ms-square:expandableTextView:0.1.4'
+
+    implementation 'com.ss.bannerslider:bannerslider:2.0.0'
 }

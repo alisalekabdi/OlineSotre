@@ -1,8 +1,13 @@
 package com.example.pascal_pc.baghali.controller;
 
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
@@ -11,12 +16,24 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.controller.productCategory.ProductCategoryActivity;
 import com.example.pascal_pc.baghali.controller.searchProduct.SearchProductActivity;
+import com.example.pascal_pc.baghali.prefs.UserPrefrences;
+import com.squareup.picasso.Picasso;
+
+import ss.com.bannerslider.Slider;
+import ss.com.bannerslider.adapters.SliderAdapter;
+import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
 
 
 public class BaghalActivity extends AppCompatActivity
@@ -28,6 +45,10 @@ public class BaghalActivity extends AppCompatActivity
 
     private DrawerLayout drawer;
     private NavigationView navigationView;
+
+    private TextView mUserName;
+    private ImageView mAddUser;
+    private Slider mSlider;
 
     public static Intent newIntent(Context context) {
         Intent intent = new Intent(context, BaghalActivity.class);
@@ -43,7 +64,53 @@ public class BaghalActivity extends AppCompatActivity
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         navigationView = findViewById(R.id.nav_view);
+        @SuppressLint("ResourceType")
+        View navigationHeader=navigationView.getHeaderView(0);
+        mUserName=navigationHeader.findViewById(R.id.user_name);
+        mUserName.setText(UserPrefrences.getPrefUserName(this));
+        mSlider=findViewById(R.id.special_img_slider);
+
+        mAddUser=navigationHeader.findViewById(R.id.add_user);
+        mAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                if (UserPrefrences.getPrefUserName(BaghalActivity.this) == "Register")
+                {
+                    @SuppressLint("ResourceType")
+                    LayoutInflater linf = LayoutInflater.from(BaghalActivity.this);
+                    final View view = linf.inflate(R.layout.fragment_add_user, null);
+                    final EditText userName = view.findViewById(R.id.add_user_name);
+
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(BaghalActivity.this);
+                    builder
+                            .setTitle("Add User")
+                            .setIcon(R.drawable.ic_user)
+                            .setView(view)
+                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    if (userName.getText().toString() != null) {
+                                        UserPrefrences.setPrefUserName(BaghalActivity.this, userName.getText().toString());
+                                        mUserName.setText(userName.getText().toString());
+                                    } else {
+                                        Toast.makeText(BaghalActivity.this, "You should fill blank", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            })
+                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.cancel();
+                                }
+                            })
+                            .show();
+                }
+            }
+        });
+
+
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -87,7 +154,7 @@ public class BaghalActivity extends AppCompatActivity
 
         switch (item.getItemId()) {
             case R.id.tab_search:
-                Intent intent=SearchProductActivity.newIntent(this);
+                Intent intent = SearchProductActivity.newIntent(this);
                 startActivity(intent);
                 return true;
             default:
@@ -96,6 +163,7 @@ public class BaghalActivity extends AppCompatActivity
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         int menuItemId = menuItem.getItemId();
@@ -130,8 +198,45 @@ public class BaghalActivity extends AppCompatActivity
                         REQ_KEY_POPULAR_PRODUCT);
                 startActivity(intent4);
                 break;
+            case R.id.about_market:
+                Toast.makeText(this, "Develop By Ali", Toast.LENGTH_SHORT).show();
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+    public class MainSliderAdapter extends SliderAdapter {
+        int itemCount = 2;
+
+        public MainSliderAdapter() {
+        }
+
+        public void setItemCount(int itemCount) {
+            this.itemCount = itemCount;
+        }
+
+        @Override
+        public int getItemCount() {
+            return itemCount;
+
+        }
+
+        @Override
+        public void onBindImageSlide(int position, ImageSlideViewHolder viewHolder) {
+            switch (position) {
+                case 0:
+
+                    viewHolder.bindImageSlide(R.drawable.image);
+                    break;
+                case 1:
+                    viewHolder.bindImageSlide(R.drawable.image);
+                    break;
+                case 2:
+                    viewHolder.bindImageSlide(R.drawable.image);
+                    break;
+            }
+        }
+    }
+
 }

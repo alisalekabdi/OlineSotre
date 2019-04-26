@@ -173,9 +173,8 @@ public class ProductListViewFragment extends Fragment {
             mProduct = product;
             mProductItemTitleTv.setText("Name : " + mProduct.getName());
             mProductItemPriceTv.setText("Price : " + mProduct.getPrice());
-            if (mProduct.getImages().get(0).getPath() != null && mProduct.getImages().size() > 0) {
+            if (mProduct.getImages()!= null && mProduct.getImages().size() > 0) {
                 Picasso.get().load(product.getImages().get(0).getPath()).into(mProductItemImgView);
-
             }
         }
     }

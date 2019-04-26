@@ -12,7 +12,7 @@
     <color name="FloralWhite">#FFFAF0</color>
     <color name="LemonChiffon">#FFFACD</color>
     <color name="Cornsilk">#FFF8DC</color>
-    <color name="Seashell">#FFF5EE</color>
+    <color name="Seashell">#fff5ee</color>
     <color name="LavenderBlush">#FFF0F5</color>
     <color name="PapayaWhip">#FFEFD5</color>
     <color name="BlanchedAlmond">#FFEBCD</color>
@@ -137,7 +137,7 @@
     <color name="DeepSkyBlue">#00BFFF</color>
     <color name="DarkCyan">#008B8B</color>
     <color name="Teal">#008080</color>
-    <color name="Green">#008000</color>
+    <color name="Green">#058105</color>
     <color name="DarkGreen">#006400</color>
     <color name="Blue">#0000FF</color>
     <color name="MediumBlue">#0000CD</color>

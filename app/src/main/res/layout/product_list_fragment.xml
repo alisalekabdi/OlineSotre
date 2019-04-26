@@ -38,12 +38,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="371dp"
+        <ss.com.bannerslider.Slider
+            android:id="@+id/special_img_slider"
+            android:layout_width="match_parent"
+            app:slider_animateIndicators="true"
             android:layout_height="180dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/image"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,7 @@
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+            app:layout_constraintTop_toBottomOf="@+id/special_img_slider" />
 
         <LinearLayout
             android:id="@+id/newest_products_container"

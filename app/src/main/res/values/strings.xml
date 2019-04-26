@@ -14,5 +14,31 @@
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_search_product">SearchProductActivity</string>
 
+    <string-array name="filter_by_color">
+
+        <item>None</item>
+        <item>Black</item>
+        <item>White</item>
+        <item>Brown</item>
+        <item>Green</item>
+        <item>Yellow</item>
+        <item>Grey</item>
+        <item>Red</item>
+        <item>Blue</item>
+        <item>Pink</item>
+        <item>Orange</item>
+
+    </string-array>
+
+    <string-array name="sort_product">
+
+        <item>None</item>
+        <item>Best Seller</item>
+        <item>low to high price</item>
+        <item>High to low price</item>
+        <item>Newest</item>
+
+    </string-array>
+
 
 </resources>
