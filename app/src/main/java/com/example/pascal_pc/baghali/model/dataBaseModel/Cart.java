@@ -17,12 +17,17 @@ public class Cart {
     private Integer mProductId;
     private int mProductCount;
     private Float mPrice;
-    @Generated(hash = 1183783017)
-    public Cart(Long mId, Integer mProductId, int mProductCount, Float mPrice) {
+    private String mName;
+    private String mImgPath;
+    @Generated(hash = 55606297)
+    public Cart(Long mId, Integer mProductId, int mProductCount, Float mPrice,
+            String mName, String mImgPath) {
         this.mId = mId;
         this.mProductId = mProductId;
         this.mProductCount = mProductCount;
         this.mPrice = mPrice;
+        this.mName = mName;
+        this.mImgPath = mImgPath;
     }
     @Generated(hash = 1029823171)
     public Cart() {
@@ -50,6 +55,18 @@ public class Cart {
     }
     public void setMPrice(Float mPrice) {
         this.mPrice = mPrice;
+    }
+    public String getMName() {
+        return this.mName;
+    }
+    public void setMName(String mName) {
+        this.mName = mName;
+    }
+    public String getMImgPath() {
+        return this.mImgPath;
+    }
+    public void setMImgPath(String mImgPath) {
+        this.mImgPath = mImgPath;
     }
 
 }

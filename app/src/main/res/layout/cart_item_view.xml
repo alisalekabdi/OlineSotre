@@ -98,7 +98,8 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:gravity="right|center"
-            android:paddingRight="8dp" />
+            android:paddingRight="8dp"
+            android:textColor="@color/Green" />
     </LinearLayout>
 
     <LinearLayout
@@ -131,7 +132,8 @@
             android:layout_weight="1"
             android:gravity="right|center"
             android:paddingRight="8dp"
-            android:text="TextView" />
+            android:text="TextView"
+            android:textColor="@color/Green" />
     </LinearLayout>
 
     <Button

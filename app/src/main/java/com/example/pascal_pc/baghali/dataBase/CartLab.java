@@ -6,9 +6,6 @@ import com.example.pascal_pc.baghali.model.dataBaseModel.DaoSession;
 import com.example.pascal_pc.baghali.utils.App;
 import com.example.pascal_pc.baghali.model.dataBaseModel.Cart;
 
-import org.greenrobot.greendao.query.QueryBuilder;
-
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -41,10 +38,28 @@ public class CartLab {
         return mCartDao.loadAll();
     }
 
-    public List<Cart> checkCart(Integer id) {
-        QueryBuilder<Cart> qb = mCartDao.queryBuilder();
-        return qb.where(CartDao.Properties.MProductId.eq(id)).list();
-
+    public Cart checkCart(Integer id) {
+        List<Cart> carts = mCartDao.queryBuilder()
+                .where(CartDao.Properties.MProductId.eq(id)).list();
+        for (Cart cart : carts) {
+            return cart;
+        }
+        return null;
     }
 
+    public void updateProductCount(Cart cart){
+        mCartDao.update(cart);
+    }
+    public  void deleteCarts(){
+        mCartDao.deleteAll();
+    }
+    public Float getTotalCost(){
+        Float totalCost= Float.valueOf(0);
+        List<Cart> cartList=mCartDao.queryBuilder()
+                .list();
+        for (Cart cart:cartList) {
+            totalCost+=cart.getMPrice()*cart.getMProductCount();
+        }
+        return totalCost;
+    }
 }

@@ -17,10 +17,10 @@ public class Product {
     private String average_rating;
     private String rating_count;
     private String total_sales;
+    private List<Attributes> attributes;
 
-    public Product(List<Image> images, String name, String price, int id,
-                   String description, String createdDate, String average_rating,
-                   String rating_count, String total_sales) {
+    public Product(List<Image> images, String name, String price, int id, String description, String createdDate,
+                   String average_rating, String rating_count, String total_sales, List<Attributes> attributes) {
         mImages = images;
         this.name = name;
         this.price = price;
@@ -30,6 +30,7 @@ public class Product {
         this.average_rating = average_rating;
         this.rating_count = rating_count;
         this.total_sales = total_sales;
+        this.attributes = attributes;
     }
 
     public List<Image> getImages() {
@@ -66,5 +67,49 @@ public class Product {
 
     public String getTotal_sales() {
         return total_sales;
+    }
+
+    public List<Attributes> getAttributes() {
+        return attributes;
+    }
+
+    public void setImages(List<Image> images) {
+        mImages = images;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setCreatedDate(String createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setAverage_rating(String average_rating) {
+        this.average_rating = average_rating;
+    }
+
+    public void setRating_count(String rating_count) {
+        this.rating_count = rating_count;
+    }
+
+    public void setTotal_sales(String total_sales) {
+        this.total_sales = total_sales;
+    }
+
+    public void setAttributes(List<Attributes> attributes) {
+        this.attributes = attributes;
     }
 }

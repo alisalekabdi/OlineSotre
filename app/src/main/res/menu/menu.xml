@@ -18,7 +18,7 @@
         android:id="@+id/gr4">
 
         <item
-            android:id="@+id/tab_shopping"
+            android:id="@+id/tab_cart"
             android:icon="@drawable/ic_shopping"
             android:title="@string/basket" />
 

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -26,6 +27,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import cz.intik.overflowindicator.OverflowPagerIndicator;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -39,12 +41,12 @@ public class ProductInfFragment extends Fragment {
     private int mProductId;
     private ImagesAdapter mAdapter;
     private Button mAddToCart;
-
+    private ImageButton mExpandBtn,mCollapseBtn;
     private RecyclerView mRecyclerView;
     private TextView mTitle, mPrice, mTotalSales, mRatingCount, mDescription;
     private RatingBar mRatingBar;
-
     private Product product;
+    private OverflowPagerIndicator mIndicator;
 
 
     public static ProductInfFragment newInstance(int productid) {
@@ -69,6 +71,10 @@ public class ProductInfFragment extends Fragment {
         mRatingBar = view.findViewById(R.id.product_ratingBar);
         mDescription = view.findViewById(R.id.description_tv);
         mAddToCart = view.findViewById(R.id.add_to_cart);
+        mIndicator=view.findViewById(R.id.product_img_indicator);
+        mExpandBtn=view.findViewById(R.id.expand_des_tv);
+        mCollapseBtn=view.findViewById(R.id.collapse_des_tv);
+        mDescription.setMaxLines(5);
 
     }
 
@@ -91,12 +97,31 @@ public class ProductInfFragment extends Fragment {
                 if (CartLab.getInstance().checkCart(mProductId) == null) {
                     Cart cart = new Cart();
                     cart.setMProductId(mProductId);
-                    cart.setMProductCount(1);
+                    cart.setMName(product.getName());
                     cart.setMPrice(Float.valueOf(product.getPrice()));
+                    cart.setMImgPath(product.getImages().get(0).getPath());
+                    cart.setMProductCount(1);
                     CartLab.getInstance().addCart(cart);
+                    Toast.makeText(getActivity(), "Added to your cart", Toast.LENGTH_SHORT).show();
                 }else {
                     Toast.makeText(getActivity(), "This product already has been added", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+        mCollapseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCollapseBtn.setVisibility(View.INVISIBLE);
+                mExpandBtn.setVisibility(View.VISIBLE);
+                mDescription.setMaxLines(5);
+            }
+        });
+        mExpandBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mCollapseBtn.setVisibility(View.VISIBLE);
+                mExpandBtn.setVisibility(View.INVISIBLE);
+                mDescription.setMaxLines(Integer.MAX_VALUE);
             }
         });
         mRecyclerView.setLayoutManager(new
@@ -112,6 +137,7 @@ public class ProductInfFragment extends Fragment {
                             if (mAdapter == null) {
                                 mAdapter = new ImagesAdapter(product.getImages());
                                 mRecyclerView.setAdapter(mAdapter);
+                                mIndicator.attachToRecyclerView(mRecyclerView);
                             } else {
                                 mAdapter.setImageList(product.getImages());
                                 mAdapter.notifyDataSetChanged();
@@ -181,7 +207,9 @@ public class ProductInfFragment extends Fragment {
         @Override
         public void onBindViewHolder(ImagesHolder holder, int position) {
             Image image = mImageList.get(position);
+            mIndicator.onPageSelected(holder.getAdapterPosition());
             holder.bind(image);
+
         }
 
         @Override

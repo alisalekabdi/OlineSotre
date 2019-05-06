@@ -35,6 +35,7 @@
         android:layout_marginRight="116dp"
         android:layout_marginBottom="8dp"
         android:padding="4dp"
+        android:text="Register"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/AliceBlue"
         app:layout_constraintBottom_toBottomOf="parent"

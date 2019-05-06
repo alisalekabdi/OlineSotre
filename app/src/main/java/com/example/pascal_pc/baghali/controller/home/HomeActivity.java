@@ -1,42 +1,41 @@
-package com.example.pascal_pc.baghali.controller;
+package com.example.pascal_pc.baghali.controller.home;
 
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.pascal_pc.baghali.R;
+import com.example.pascal_pc.baghali.controller.cart.CartActivity;
 import com.example.pascal_pc.baghali.controller.productCategory.ProductCategoryActivity;
+import com.example.pascal_pc.baghali.controller.registerCustomer.RegisterCustActivity;
 import com.example.pascal_pc.baghali.controller.searchProduct.SearchProductActivity;
-import com.example.pascal_pc.baghali.prefs.UserPrefrences;
-import com.squareup.picasso.Picasso;
+import com.example.pascal_pc.baghali.controller.sortList.SortListActivity;
+import com.example.pascal_pc.baghali.controller.viewPager.ViewPagerFragment;
+import com.example.pascal_pc.baghali.dataBase.CartLab;
+import com.example.pascal_pc.baghali.dataBase.prefs.UserPrefrences;
 
-import ss.com.bannerslider.Slider;
-import ss.com.bannerslider.adapters.SliderAdapter;
-import ss.com.bannerslider.viewholder.ImageSlideViewHolder;
-
-
-public class BaghalActivity extends AppCompatActivity
+public class HomeActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static final int REQ_ID_NEWEST_PRODUCT = 1;
     public static final int REQ_ID_POPULAR_PRODUCT = 2;
@@ -46,12 +45,13 @@ public class BaghalActivity extends AppCompatActivity
     private DrawerLayout drawer;
     private NavigationView navigationView;
 
-    private TextView mUserName;
+    private TextView mUserName, mPopullarListBtn, mNewestListBtn;
     private ImageView mAddUser;
-    private Slider mSlider;
+    private ViewPager mSpecialVP;
+    private TabLayout mSpecialTabLayout;
 
     public static Intent newIntent(Context context) {
-        Intent intent = new Intent(context, BaghalActivity.class);
+        Intent intent = new Intent(context, HomeActivity.class);
         return intent;
     }
 
@@ -67,49 +67,55 @@ public class BaghalActivity extends AppCompatActivity
 
         navigationView = findViewById(R.id.nav_view);
         @SuppressLint("ResourceType")
-        View navigationHeader=navigationView.getHeaderView(0);
-        mUserName=navigationHeader.findViewById(R.id.user_name);
-        mUserName.setText(UserPrefrences.getPrefUserName(this));
-        mSlider=findViewById(R.id.special_img_slider);
+        View navigationHeader = navigationView.getHeaderView(0);
+        mUserName = navigationHeader.findViewById(R.id.user_name);
+        mUserName.setText(UserPrefrences.getPrefFirstName(this));
+        mSpecialVP = findViewById(R.id.special_img_view_pager);
+        mSpecialTabLayout = findViewById(R.id.special_indicator);
+        mAddUser = navigationHeader.findViewById(R.id.add_user);
+        mNewestListBtn = findViewById(R.id.newest_list_tv);
+        mPopullarListBtn = findViewById(R.id.popular_list_tv);
 
-        mAddUser=navigationHeader.findViewById(R.id.add_user);
-        mAddUser.setOnClickListener(new View.OnClickListener() {
+        mNewestListBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if (UserPrefrences.getPrefUserName(BaghalActivity.this) == "Register")
-                {
-                    @SuppressLint("ResourceType")
-                    LayoutInflater linf = LayoutInflater.from(BaghalActivity.this);
-                    final View view = linf.inflate(R.layout.fragment_add_user, null);
-                    final EditText userName = view.findViewById(R.id.add_user_name);
-
-                    final AlertDialog.Builder builder = new AlertDialog.Builder(BaghalActivity.this);
-                    builder
-                            .setTitle("Add User")
-                            .setIcon(R.drawable.ic_user)
-                            .setView(view)
-                            .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    if (userName.getText().toString() != null) {
-                                        UserPrefrences.setPrefUserName(BaghalActivity.this, userName.getText().toString());
-                                        mUserName.setText(userName.getText().toString());
-                                    } else {
-                                        Toast.makeText(BaghalActivity.this, "You should fill blank", Toast.LENGTH_SHORT).show();
-                                    }
-                                }
-                            })
-                            .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.cancel();
-                                }
-                            })
-                            .show();
-                }
+                Intent intent3 = SortListActivity.newIntent(HomeActivity.this,
+                        2);
+                startActivity(intent3);
             }
         });
 
+        mPopullarListBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent4 = SortListActivity.newIntent(HomeActivity.this,
+                        3);
+                startActivity(intent4);
+
+            }
+        });
+
+        mSpecialVP.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int i) {
+                return ViewPagerFragment.newInstance(i);
+            }
+
+            @Override
+            public int getCount() {
+                return 5;
+            }
+
+        });
+        mSpecialTabLayout.setupWithViewPager(mSpecialVP);
+
+        mAddUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=RegisterCustActivity.newIntent(HomeActivity.this);
+                startActivity(intent);
+            }
+        });
 
         drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -157,6 +163,13 @@ public class BaghalActivity extends AppCompatActivity
                 Intent intent = SearchProductActivity.newIntent(this);
                 startActivity(intent);
                 return true;
+            case R.id.tab_shopping:
+                if (CartLab.getInstance().getCarts().size() > 0) {
+                    Intent intent1 = CartActivity.newIntent(this);
+                    startActivity(intent1);
+                } else
+                    Toast.makeText(this, "Cart is empty", Toast.LENGTH_SHORT).show();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
@@ -174,69 +187,43 @@ public class BaghalActivity extends AppCompatActivity
 
         switch (menuItemId) {
             case R.id.nav_product_list:
-                Intent intent = ProductCategoryActivity.newIntent(BaghalActivity.this,
+                Intent intent = ProductCategoryActivity.newIntent(HomeActivity.this,
                         REQ_KEY_DEFAUlT);
                 startActivity(intent);
                 break;
             case R.id.nav_home:
-                Intent intent1 = BaghalActivity.newIntent(this);
+                Intent intent1 = HomeActivity.newIntent(this);
                 startActivity(intent1);
                 this.finish();
                 break;
             case R.id.nav_best_sell:
-                Intent intent2 = ProductCategoryActivity.newIntent(BaghalActivity.this,
+                Intent intent2 = SortListActivity.newIntent(HomeActivity.this,
                         REQ_KEY_BEST_SELL);
                 startActivity(intent2);
                 break;
             case R.id.nav_recent:
-                Intent intent3 = ProductCategoryActivity.newIntent(BaghalActivity.this,
+                Intent intent3 = SortListActivity.newIntent(HomeActivity.this,
                         REQ_KEY_RECENT_PRODUCT);
                 startActivity(intent3);
                 break;
             case R.id.nav_popular:
-                Intent intent4 = ProductCategoryActivity.newIntent(BaghalActivity.this,
+                Intent intent4 = SortListActivity.newIntent(HomeActivity.this,
                         REQ_KEY_POPULAR_PRODUCT);
                 startActivity(intent4);
                 break;
             case R.id.about_market:
-                Toast.makeText(this, "Develop By Ali", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Develop By Ali Salek", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.tab_cart:
+                if (CartLab.getInstance().getCarts().size() > 0) {
+                    Intent intent5 = CartActivity.newIntent(HomeActivity.this);
+                    startActivity(intent5);
+                } else
+                    Toast.makeText(this, "Cart is empty", Toast.LENGTH_SHORT).show();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    public class MainSliderAdapter extends SliderAdapter {
-        int itemCount = 2;
-
-        public MainSliderAdapter() {
-        }
-
-        public void setItemCount(int itemCount) {
-            this.itemCount = itemCount;
-        }
-
-        @Override
-        public int getItemCount() {
-            return itemCount;
-
-        }
-
-        @Override
-        public void onBindImageSlide(int position, ImageSlideViewHolder viewHolder) {
-            switch (position) {
-                case 0:
-
-                    viewHolder.bindImageSlide(R.drawable.image);
-                    break;
-                case 1:
-                    viewHolder.bindImageSlide(R.drawable.image);
-                    break;
-                case 2:
-                    viewHolder.bindImageSlide(R.drawable.image);
-                    break;
-            }
-        }
     }
 
 }

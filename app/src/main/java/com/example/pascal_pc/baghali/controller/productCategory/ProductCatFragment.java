@@ -122,7 +122,7 @@ public class ProductCatFragment extends Fragment {
         public void bind(Product product) {
             mProduct = product;
             mProductItemTitleTv.setText("Name : " + mProduct.getName());
-            mProductItemPriceTv.setText("Price : " + mProduct.getPrice());
+            mProductItemPriceTv.setText("Price : " + mProduct.getPrice()+" Rial");
             if (mProduct.getImages()!= null && mProduct.getImages().size() > 0) {
                 Picasso.get().load(product.getImages().get(0).getPath()).fit().centerCrop().into(mProductItemImgView);
 

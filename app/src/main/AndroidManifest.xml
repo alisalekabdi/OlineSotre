@@ -9,10 +9,10 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_slider_zero"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".controller.BaghalActivity" />
+        <activity android:name=".controller.home.HomeActivity" />
         <activity android:name=".controller.productInfo.ProductInfoActivity" />
         <activity android:name=".controller.productCategory.ProductCategoryActivity" />
         <activity android:name=".controller.splashActivity.SplashActivity">
@@ -25,7 +25,11 @@
         <activity
             android:name=".controller.searchProduct.SearchProductActivity"
             android:label="@string/title_activity_search_product"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
+        <activity android:name=".controller.cart.CartActivity" />
+        <activity android:name=".controller.finalizeOrder.OrderActivity" />
+        <activity android:name=".controller.sortList.SortListActivity" />
+        <activity android:name=".controller.registerCustomer.RegisterCustActivity"></activity>
     </application>
 
 </manifest>

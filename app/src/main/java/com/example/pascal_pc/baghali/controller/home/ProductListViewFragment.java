@@ -1,4 +1,4 @@
-package com.example.pascal_pc.baghali.controller;
+package com.example.pascal_pc.baghali.controller.home;
 
 
 import android.content.Intent;
@@ -7,7 +7,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,18 +14,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.pascal_pc.baghali.Network.Api;
-import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
 import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.controller.productInfo.ProductInfoActivity;
+import com.example.pascal_pc.baghali.model.ProductList;
 import com.example.pascal_pc.baghali.model.product.Product;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 
 /**
@@ -66,7 +60,6 @@ public class ProductListViewFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_product_list_view, container, false);
-
         mProductRecyclerView = view.findViewById(R.id.product_list_recycler_view);
         mProductRecyclerView.setLayoutManager(new
                 LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
@@ -75,75 +68,30 @@ public class ProductListViewFragment extends Fragment {
          * req_id=2-->for popular list
          * req_id=3-->for bestSell list
          */
-        switch (REQUEST_CODE) {
-            case 1:
-                RetrofitClientInstance.getRetrofitInstance()
-                        .create(Api.class)
-                        .getProducts()
-                        .enqueue(new Callback<List<Product>>() {
-                            @Override
-                            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                                if (response.isSuccessful()) {
-                                    List<Product> mProductList = response.body();
-                                    Log.d(TAG, "size of product list in reqId one " + String.valueOf(mProductList.size()));
-                                    mAdapter = new ListAdapter(mProductList);
-                                    mProductRecyclerView.setAdapter(mAdapter);
-                                }
-                            }
+        try {
+            switch (REQUEST_CODE) {
 
-                            @Override
-                            public void onFailure(Call<List<Product>> call, Throwable t) {
-                                Toast.makeText(getActivity(), "Failed request", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                break;
-            case 2:
-                RetrofitClientInstance.getRetrofitInstance()
-                        .create(Api.class)
-                        .getPopularList()
-                        .enqueue(new Callback<List<Product>>() {
-                            @Override
-                            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                                if (response.isSuccessful()) {
-                                    List<Product> mProductList = response.body();
-                                    Log.d(TAG, "size of product list in reqId two " + String.valueOf(mProductList.size()));
-                                    mAdapter = new ListAdapter(mProductList);
-                                    mProductRecyclerView.setAdapter(mAdapter);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<List<Product>> call, Throwable t) {
-                                Toast.makeText(getActivity(), "Failed request", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                break;
-            case 3:
-                RetrofitClientInstance.getRetrofitInstance()
-                        .create(Api.class)
-                        .getBestSellerList()
-                        .enqueue(new Callback<List<Product>>() {
-                            @Override
-                            public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                                if (response.isSuccessful()) {
-                                    List<Product> mProductList = response.body();
-                                    Log.d(TAG, "size of product list in reqId three " + String.valueOf(mProductList.size()));
-                                    mAdapter = new ListAdapter(mProductList);
-                                    mProductRecyclerView.setAdapter(mAdapter);
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(Call<List<Product>> call, Throwable t) {
-                                Toast.makeText(getActivity(), "Failed request", Toast.LENGTH_LONG).show();
-                            }
-                        });
-                break;
+                case 1:
+                    List<Product> mRecentProductList = ProductList.getOurInstance().getmRecentProducts();
+                    mAdapter = new ListAdapter(mRecentProductList);
+                    mProductRecyclerView.setAdapter(mAdapter);
+                    break;
+                case 2:
+                    List<Product> mPopularProductList = ProductList.getOurInstance().getmPopularProducts();
+                    mAdapter = new ListAdapter(mPopularProductList);
+                    mProductRecyclerView.setAdapter(mAdapter);
+                    break;
+                case 3:
+                    List<Product> mBestSellersList = ProductList.getOurInstance().getmBestSellerProducts();
+                    mAdapter = new ListAdapter(mBestSellersList);
+                    mProductRecyclerView.setAdapter(mAdapter);
+                    break;
                 default:
                     break;
+            }
+        }catch (Exception e){
+            Toast.makeText(getActivity(),"Check your connection and try again", Toast.LENGTH_LONG).show();
         }
-
-
         return view;
     }
 
@@ -172,7 +120,7 @@ public class ProductListViewFragment extends Fragment {
 
             mProduct = product;
             mProductItemTitleTv.setText("Name : " + mProduct.getName());
-            mProductItemPriceTv.setText("Price : " + mProduct.getPrice());
+            mProductItemPriceTv.setText("Price : " + mProduct.getPrice()+" Rial");
             if (mProduct.getImages()!= null && mProduct.getImages().size() > 0) {
                 Picasso.get().load(product.getImages().get(0).getPath()).into(mProductItemImgView);
             }
