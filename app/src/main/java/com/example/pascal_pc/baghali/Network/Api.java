@@ -1,9 +1,11 @@
 package com.example.pascal_pc.baghali.Network;
 
+import com.example.pascal_pc.baghali.model.customer.Coupon;
 import com.example.pascal_pc.baghali.model.customer.Customer;
 import com.example.pascal_pc.baghali.model.customer.OrderJsonBody;
 import com.example.pascal_pc.baghali.model.product.Product;
 import com.example.pascal_pc.baghali.model.category.ProductCatergory;
+import com.example.pascal_pc.baghali.model.product.Review;
 
 import java.util.List;
 
@@ -67,5 +69,29 @@ public interface Api {
             "consumer_key=ck_00fdf4e3f65c5275d802b412db586ba2cac6835f" +
             "&consumer_secret=cs_d2571d995db502ea4b04bfae270b92ac447eb8ba")
     Call<Customer> sendOrder(@Body OrderJsonBody orderJsonBody);
+
+    @GET("coupons?" +
+            "consumer_key=ck_00fdf4e3f65c5275d802b412db586ba2cac6835f" +
+            "&consumer_secret=cs_d2571d995db502ea4b04bfae270b92ac447eb8ba")
+    Call<Coupon> getCouponByCode(@Path("code") String code);
+
+    @GET("coupons?" +
+            "consumer_key=ck_00fdf4e3f65c5275d802b412db586ba2cac6835f" +
+            "&consumer_secret=cs_d2571d995db502ea4b04bfae270b92ac447eb8ba")
+    Call<List<Coupon>> getCoupons();
+
+    @GET(" products/reviews?"+
+            "consumer_key=ck_b45a5d66023bec9aec70b2d6d088e55bc11c0210" +
+            "&consumer_secret=cs_92e419a6da8c4f6b7a6f60a5020b667ce49854ef")
+    Call<List<Review>> getProductReviewsById(@Query("product") int productId);
+
+    @POST(" products/reviews?"+
+            "consumer_key=ck_b45a5d66023bec9aec70b2d6d088e55bc11c0210" +
+            "&consumer_secret=cs_92e419a6da8c4f6b7a6f60a5020b667ce49854ef")
+    @FormUrlEncoded
+    Call<Customer> sendReview(@Field("product_id") int product_id,
+                                 @Field("review") String review,
+                                 @Field("reviewer") String reviewer_name,
+                                 @Field("reviewer_email") String email);
 
 }

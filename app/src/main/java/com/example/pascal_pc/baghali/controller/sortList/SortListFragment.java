@@ -71,7 +71,7 @@ public class SortListFragment extends Fragment {
 
         switch (mReqId) {
             case 1:
-                mTilteTV.setText("Best seller list");
+                mTilteTV.setText("پرفروش ترین ها");
                 RetrofitClientInstance.getRetrofitInstance()
                         .create(Api.class)
                         .getBestSellerList()
@@ -94,7 +94,7 @@ public class SortListFragment extends Fragment {
                         });
                 break;
             case 2:
-                mTilteTV.setText("Recent list");
+                mTilteTV.setText("جدیدترین ها");
                 RetrofitClientInstance.getRetrofitInstance()
                         .create(Api.class)
                         .getProducts()
@@ -117,7 +117,7 @@ public class SortListFragment extends Fragment {
                         });
                 break;
             case 3:
-                mTilteTV.setText("Popular list");
+                mTilteTV.setText("پربازدیدترین ها");
                 RetrofitClientInstance.getRetrofitInstance()
                         .create(Api.class)
                         .getPopularList()
@@ -170,8 +170,8 @@ public class SortListFragment extends Fragment {
 
         public void bind(Product product) {
             mProduct = product;
-            mProductItemTitleTv.setText("Name : " + mProduct.getName());
-            mProductItemPriceTv.setText("Price : " + mProduct.getPrice() + " Rial");
+            mProductItemTitleTv.setText( mProduct.getName());
+            mProductItemPriceTv.setText(  mProduct.getPrice()+" ریال " );
             if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
                 Picasso.get().load(product.getImages().get(0).getPath()).fit().centerCrop().into(mProductItemImgView);
 

@@ -5,12 +5,13 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class UserPrefrences {
-    public static final String PREF_USER_NAME = "userName";
-    public static final String PREF_USER_LAST_NAME = "userLastName";
-    public static final String PREF_USER_PHONE_NUMBER = "phone_number";
-    public static final String PREF_USER_EMAIL = "email";
-    public static final String PREF_USER_PASSWORD = "password";
-    public static final String PREF_CUSTOMER_ID = "customer_id";
+    private static final String PREF_USER_NAME = "userName";
+    private static final String PREF_USER_LAST_NAME = "userLastName";
+    private static final String PREF_USER_PHONE_NUMBER = "phone_number";
+    private static final String PREF_USER_EMAIL = "email";
+    private static final String PREF_USER_PASSWORD = "password";
+    private static final String PREF_CUSTOMER_ID = "customer_id";
+    private static final String PREF_LAST_PRODUCT_ID= "last_product_id";
 
     public static void setPrefFirstName(Context context, String name) {
         SharedPreferences sharedPreferences=
@@ -24,7 +25,7 @@ public class UserPrefrences {
     public static String getPrefFirstName(Context context){
         SharedPreferences sharedPreferences=
                 PreferenceManager.getDefaultSharedPreferences(context);
-        return sharedPreferences.getString(PREF_USER_NAME,"Register");
+        return sharedPreferences.getString(PREF_USER_NAME,"ثبت نام کنید");
     }
 
     public static void setPrefLastName(Context context, String lastName) {
@@ -99,5 +100,19 @@ public class UserPrefrences {
         SharedPreferences sharedPreferences=
                 PreferenceManager.getDefaultSharedPreferences(context);
         return Integer.parseInt(sharedPreferences.getString(PREF_CUSTOMER_ID,"0"));
+    }
+    public static void setPrefLastProductId(Context context, int customerId) {
+        SharedPreferences sharedPreferences=
+                PreferenceManager.getDefaultSharedPreferences(context);
+
+        sharedPreferences
+                .edit()
+                .putString(PREF_LAST_PRODUCT_ID, String.valueOf(customerId))
+                .apply();
+    }
+    public static int getPrefLastProductId(Context context){
+        SharedPreferences sharedPreferences=
+                PreferenceManager.getDefaultSharedPreferences(context);
+        return Integer.parseInt(sharedPreferences.getString(PREF_LAST_PRODUCT_ID,"0"));
     }
 }

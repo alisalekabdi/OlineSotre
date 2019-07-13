@@ -71,7 +71,7 @@ public class RegisterCustFragment extends Fragment {
                     UserPrefrences.setPrefFirstName(getActivity(), name.getText().toString());
                     UserPrefrences.setPrefLastName(getActivity(), lastName.getText().toString());
                     UserPrefrences.setPrefUserName(getActivity(), userName.getText().toString());
-                    UserPrefrences.setPrefLastName(getActivity(), email.getText().toString());
+                    UserPrefrences.setPrefUserEmail(getActivity(), email.getText().toString());
                     UserPrefrences.setPrefUserPassword(getActivity(), password.getText().toString());
 
                     registerCustomer(name.getText().toString(),lastName.getText().toString(),
@@ -96,8 +96,9 @@ public class RegisterCustFragment extends Fragment {
                     public void onResponse(Call<Customer> call, Response<Customer> response) {
                         Toast.makeText(getActivity(), "You are registered"+response.message(), Toast.LENGTH_SHORT).show();
                         if(response.isSuccessful()){
-                            mDoneAnimationView.setVisibility(View.VISIBLE);
+                            //mDoneAnimationView.setVisibility(View.VISIBLE);
                             Log.e("alisalek", "onResponse: You are registered"+response.body().getId());
+                            Toast.makeText(getActivity(), "You are registered successfully", Toast.LENGTH_SHORT).show();
                             UserPrefrences.setPrefCustomerId(getActivity(),response.body().getId());
                             Handler handler=new Handler();
                             handler.postDelayed(new Runnable() {

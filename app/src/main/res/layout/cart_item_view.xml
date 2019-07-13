@@ -82,6 +82,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView">
 
+
+        <TextView
+            android:id="@+id/cart_item_price"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:paddingRight="8dp"
+            android:textColor="@color/Green" />
         <TextView
             android:id="@+id/textView11"
             android:layout_width="0dp"
@@ -90,16 +99,7 @@
             android:background="#f7f7f7"
             android:gravity="left|right|center"
             android:paddingLeft="8dp"
-            android:text="price" />
-
-        <TextView
-            android:id="@+id/cart_item_price"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="right|center"
-            android:paddingRight="8dp"
-            android:textColor="@color/Green" />
+            android:text="قیمت" />
     </LinearLayout>
 
     <LinearLayout
@@ -116,24 +116,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
-        <TextView
-            android:id="@+id/textView14"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="left|center"
-            android:paddingLeft="8dp"
-            android:text="Final cost" />
 
         <TextView
             android:id="@+id/cart_item_total_cost"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:gravity="right|center"
+            android:gravity="left|center"
             android:paddingRight="8dp"
             android:text="TextView"
             android:textColor="@color/Green" />
+        <TextView
+            android:id="@+id/textView14"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="right|center"
+            android:paddingLeft="8dp"
+            android:text="قیمت نهایی" />
     </LinearLayout>
 
     <Button
@@ -148,7 +148,7 @@
         android:layout_weight="1"
         android:background="@android:color/white"
         android:gravity="left|center"
-        android:text="Delete"
+        android:text="حذف"
         android:textColor="#d50000"
         android:textStyle="normal"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -30,6 +30,7 @@ import com.example.pascal_pc.baghali.controller.cart.CartActivity;
 import com.example.pascal_pc.baghali.controller.productCategory.ProductCategoryActivity;
 import com.example.pascal_pc.baghali.controller.registerCustomer.RegisterCustActivity;
 import com.example.pascal_pc.baghali.controller.searchProduct.SearchProductActivity;
+import com.example.pascal_pc.baghali.controller.setting.SettingActivity;
 import com.example.pascal_pc.baghali.controller.sortList.SortListActivity;
 import com.example.pascal_pc.baghali.controller.viewPager.ViewPagerFragment;
 import com.example.pascal_pc.baghali.dataBase.CartLab;
@@ -69,7 +70,6 @@ public class HomeActivity extends AppCompatActivity
         @SuppressLint("ResourceType")
         View navigationHeader = navigationView.getHeaderView(0);
         mUserName = navigationHeader.findViewById(R.id.user_name);
-        mUserName.setText(UserPrefrences.getPrefFirstName(this));
         mSpecialVP = findViewById(R.id.special_img_view_pager);
         mSpecialTabLayout = findViewById(R.id.special_indicator);
         mAddUser = navigationHeader.findViewById(R.id.add_user);
@@ -221,9 +221,18 @@ public class HomeActivity extends AppCompatActivity
                 } else
                     Toast.makeText(this, "Cart is empty", Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.settings:
+                Intent intent5=SettingActivity.newIntent(this);
+                startActivity(intent5);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mUserName.setText(UserPrefrences.getPrefFirstName(this));
+    }
 }

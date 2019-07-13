@@ -3,7 +3,7 @@ package com.example.pascal_pc.baghali.model.customer;
 public class Billing {
     private String first_name;
     private String last_name;
-    private  String company;
+    private String company;
     private String address_1;
     private String address_2;
     private String city;

@@ -39,6 +39,7 @@ import retrofit2.Response;
  */
 public class CartFragment extends Fragment {
 
+    public static final int REQ_CODE_SEND_ORDER=1;
     private Button mFinalizePurchaseBtn;
     private RecyclerView mCartRV;
     private TextView mTotalCost;
@@ -72,9 +73,9 @@ public class CartFragment extends Fragment {
             public void onClick(View v) {
                 if (UserPrefrences.getPrefLastName(getActivity()).length() > 0) {
                     Intent intent = OrderActivity.newIntent(getActivity());
-                    startActivity(intent);
+                    startActivityForResult(intent, REQ_CODE_SEND_ORDER);
                 }else{
-                    Toast.makeText(getActivity(), "You must first register", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(), "ابتدا ثبت نام کنید", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -89,7 +90,7 @@ public class CartFragment extends Fragment {
     }
 
     private void setTotalPRice() {
-        mTotalCost.setText(CartLab.getInstance().getTotalCost() + "" + "Rial");
+        mTotalCost.setText(" ریال"+CartLab.getInstance().getTotalCost());
     }
 
     private class CartHoler extends RecyclerView.ViewHolder {
@@ -109,7 +110,7 @@ public class CartFragment extends Fragment {
             mDltBtn = itemView.findViewById(R.id.cart_item_dlt_btn);
             mCountSpinner = itemView.findViewById(R.id.price_spinner);
 
-            mCountAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.counter_spinner, R.layout.support_simple_spinner_dropdown_item);
+            mCountAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.item_counter, R.layout.support_simple_spinner_dropdown_item);
             mCountAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             mCountSpinner.setAdapter(mCountAdapter);
             mCountSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -154,9 +155,9 @@ public class CartFragment extends Fragment {
                             if (response.isSuccessful()) {
                                 Product product = response.body();
                                 Picasso.get().load(product.getImages().get(0).getPath()).into(mProductImgView);
-                                mProductPrice.setText(product.getPrice());
+                                mProductPrice.setText(product.getPrice()+ "ریال ");
                                 mProductName.setText(product.getName());
-                                mTotalCost.setText(mCart.getMPrice() * mCart.getMProductCount() + "" + "Rial");
+                                mTotalCost.setText(mCart.getMPrice() * mCart.getMProductCount() + "" + "ریال ");
 
                             }
 
@@ -200,4 +201,11 @@ public class CartFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==-1){
+            getActivity().finish();
+        }
+    }
 }

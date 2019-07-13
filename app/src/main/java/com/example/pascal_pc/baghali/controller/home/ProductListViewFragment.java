@@ -62,7 +62,7 @@ public class ProductListViewFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_product_list_view, container, false);
         mProductRecyclerView = view.findViewById(R.id.product_list_recycler_view);
         mProductRecyclerView.setLayoutManager(new
-                LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+                LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
         /**
          * req_id=1-->for newest list
          * req_id=2-->for popular list
@@ -89,8 +89,8 @@ public class ProductListViewFragment extends Fragment {
                 default:
                     break;
             }
-        }catch (Exception e){
-            Toast.makeText(getActivity(),"Check your connection and try again", Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Check your connection and try again", Toast.LENGTH_LONG).show();
         }
         return view;
     }
@@ -110,7 +110,7 @@ public class ProductListViewFragment extends Fragment {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=ProductInfoActivity.newIntent(getActivity(),mProduct.getId());
+                    Intent intent = ProductInfoActivity.newIntent(getActivity(), mProduct.getId());
                     startActivity(intent);
                 }
             });
@@ -119,9 +119,9 @@ public class ProductListViewFragment extends Fragment {
         public void bind(Product product) {
 
             mProduct = product;
-            mProductItemTitleTv.setText("Name : " + mProduct.getName());
-            mProductItemPriceTv.setText("Price : " + mProduct.getPrice()+" Rial");
-            if (mProduct.getImages()!= null && mProduct.getImages().size() > 0) {
+            mProductItemTitleTv.setText(mProduct.getName());
+            mProductItemPriceTv.setText(mProduct.getPrice() + " Rial");
+            if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
                 Picasso.get().load(product.getImages().get(0).getPath()).into(mProductItemImgView);
             }
         }
@@ -154,7 +154,10 @@ public class ProductListViewFragment extends Fragment {
 
         @Override
         public int getItemCount() {
-            return mProductList.size();
+            if (mProductList == null) {
+                return 0;
+            } else
+                return mProductList.size();
         }
     }
 

@@ -76,8 +76,6 @@ public class SearchProductsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_search_products, container, false);
 
         findItem(view);
-
-
         setSpinner();
 
         mSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

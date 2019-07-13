@@ -10,6 +10,7 @@
 
     <TextView
         android:id="@+id/price_tv"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -18,8 +19,10 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/total_sell_tv"
+        android:padding="4dp"
+        android:textDirection="rtl"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toTopOf="@+id/attribute_btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,59 +39,14 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
+        android:padding="8dp"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/price_tv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread_inside"
         tools:text="TextView" />
-
-    <TextView
-        android:id="@+id/total_sell_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/rating_count_tv"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
-
-    <TextView
-        android:id="@+id/rating_count_tv"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="TextView"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/product_ratingBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/total_sell_tv"
-        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
-
-    <RatingBar
-        android:id="@+id/product_ratingBar"
-        android:layout_width="245dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:theme="@style/RatingBar"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/textView7"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/total_sell_tv" />
 
     <TextView
         android:id="@+id/description_tv"
@@ -108,7 +66,7 @@
 
     <ImageButton
         android:id="@+id/collapse_des_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
@@ -124,12 +82,14 @@
 
     <ImageButton
         android:id="@+id/expand_des_tv"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginBottom="8dp"
         android:background="@color/White"
         android:padding="4dp"
+        app:layout_constraintBottom_toTopOf="@+id/add_to_cart"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -138,6 +98,7 @@
 
     <TextView
         android:id="@+id/textView7"
+        style="?android:attr/listSeparatorTextViewStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -145,16 +106,18 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Description :"
-        android:textSize="18sp"
+        android:textAllCaps="false"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/product_ratingBar" />
+        app:layout_constraintTop_toBottomOf="@+id/attribute_btn"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/add_to_cart"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_margin="8dp"
         android:background="@color/Green"
         android:text="Add to cart"
         android:textAllCaps="true"
@@ -167,5 +130,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/collapse_des_tv"
         app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/attribute_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:padding="16dp"
+        android:text="Attribute"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toStartOf="@+id/cm_btn"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
+
+    <Button
+        android:id="@+id/cm_btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="16dp"
+        android:text="Comment"
+        android:textAllCaps="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/attribute_btn"
+        app:layout_constraintTop_toBottomOf="@+id/price_tv" />
 
 </android.support.constraint.ConstraintLayout>

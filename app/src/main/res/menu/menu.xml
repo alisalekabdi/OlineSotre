@@ -4,11 +4,11 @@
 
     <group android:checkableBehavior="all"
         android:id="@+id/gr1">
-        <item android:title="home"
+        <item android:title="خانه"
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_home"
             />
-        <item android:title="Product list"
+        <item android:title="لیست محصولات"
             android:id="@+id/nav_product_list"
             android:icon="@drawable/ic_action_product_list"/>
     </group>
@@ -28,15 +28,15 @@
         <item
             android:id="@+id/nav_recent"
             android:icon="@drawable/ic_action_open"
-            android:title="Recent" />
+            android:title="جدیدترین ها" />
         <item
             android:id="@+id/nav_popular"
             android:icon="@drawable/ic_action_open"
-            android:title="Popular" />
+            android:title="پربازدیدترین ها" />
         <item
             android:id="@+id/nav_best_sell"
             android:icon="@drawable/ic_action_open"
-            android:title="Top Sell" />
+            android:title="پرفروش ترین ها" />
 
     </group>
     <group android:checkableBehavior="single"
@@ -48,7 +48,7 @@
             />
         <item
             android:id="@+id/about_market"
-            android:title="About us"
+            android:title="درباره ما"
             android:icon="@drawable/ic_about"/>
     </group>
 

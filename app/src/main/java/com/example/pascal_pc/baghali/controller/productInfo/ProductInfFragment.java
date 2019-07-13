@@ -1,5 +1,6 @@
 package com.example.pascal_pc.baghali.controller.productInfo;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +19,8 @@ import com.example.pascal_pc.baghali.Network.Api;
 import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
 
 import com.example.pascal_pc.baghali.R;
+import com.example.pascal_pc.baghali.controller.productInfo.cmAndAttribute.AttributeActivity;
+import com.example.pascal_pc.baghali.controller.productInfo.cmAndAttribute.CommentActivity;
 import com.example.pascal_pc.baghali.dataBase.CartLab;
 import com.example.pascal_pc.baghali.model.product.Image;
 import com.example.pascal_pc.baghali.model.product.Product;
@@ -43,9 +45,9 @@ public class ProductInfFragment extends Fragment {
     private Button mAddToCart;
     private ImageButton mExpandBtn,mCollapseBtn;
     private RecyclerView mRecyclerView;
-    private TextView mTitle, mPrice, mTotalSales, mRatingCount, mDescription;
-    private RatingBar mRatingBar;
+    private TextView mTitle, mPrice, mDescription;
     private Product product;
+    private Button mCmBtn,mAttributeBtn;
     private OverflowPagerIndicator mIndicator;
 
 
@@ -66,14 +68,13 @@ public class ProductInfFragment extends Fragment {
         mRecyclerView = view.findViewById(R.id.img_view_recycler);
         mTitle = view.findViewById(R.id.title_tv);
         mPrice = view.findViewById(R.id.price_tv);
-        mTotalSales = view.findViewById(R.id.total_sell_tv);
-        mRatingCount = view.findViewById(R.id.rating_count_tv);
-        mRatingBar = view.findViewById(R.id.product_ratingBar);
         mDescription = view.findViewById(R.id.description_tv);
         mAddToCart = view.findViewById(R.id.add_to_cart);
         mIndicator=view.findViewById(R.id.product_img_indicator);
         mExpandBtn=view.findViewById(R.id.expand_des_tv);
         mCollapseBtn=view.findViewById(R.id.collapse_des_tv);
+        mCmBtn=view.findViewById(R.id.cm_btn);
+        mAttributeBtn=view.findViewById(R.id.attribute_btn);
         mDescription.setMaxLines(5);
 
     }
@@ -91,6 +92,21 @@ public class ProductInfFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_product_info, container, false);
         findItem(view);
+
+        mCmBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=CommentActivity.newIntent(getActivity(),mProductId);
+                startActivity(intent);
+            }
+        });
+        mAttributeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=AttributeActivity.newIntent(getActivity(),mProductId);
+                startActivity(intent);
+            }
+        });
         mAddToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,13 +158,10 @@ public class ProductInfFragment extends Fragment {
                                 mAdapter.setImageList(product.getImages());
                                 mAdapter.notifyDataSetChanged();
                             }
-                            mTitle.setText("Name :\t" + product.getName());
-                            mPrice.setText("Price :\t" + product.getPrice());
+                            mTitle.setText(product.getName());
+                            mPrice.setText(product.getPrice()+" Rial");
 //                            mColorTv.setText("Color: "+product.get);
 
-                            mTotalSales.setText("Total sale:\t" + product.getTotal_sales());
-                            mRatingCount.setText("Rating count:\t" + product.getRating_count());
-                            mRatingBar.setRating(Float.valueOf(product.getAverage_rating()));
                             mDescription.setText(product.getDescription());
 
                         }

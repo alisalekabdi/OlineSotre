@@ -1,70 +1,17 @@
 package com.example.pascal_pc.baghali.model;
 
-
-import com.example.pascal_pc.baghali.Network.Api;
-import com.example.pascal_pc.baghali.Network.RetrofitClientInstance;
 import com.example.pascal_pc.baghali.model.product.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class ProductList {
-    private List<Product> mRecentProducts;
-    private List<Product> mBestSellerProducts;
-    private List<Product> mPopularProducts;
+    private List<Product> mRecentProducts=new ArrayList<>();
+    private List<Product> mBestSellerProducts=new ArrayList<>();
+    private List<Product> mPopularProducts=new ArrayList<>();
     private static ProductList ourInstance;
 
     private ProductList() {
-        RetrofitClientInstance.getRetrofitInstance()
-                .create(Api.class)
-                .getProducts()
-                .enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()) {
-                            mRecentProducts = response.body();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-                    }
-                });
-        RetrofitClientInstance.getRetrofitInstance()
-                .create(Api.class)
-                .getPopularList()
-                .enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()) {
-                            mPopularProducts = response.body();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-                    }
-                });
-        RetrofitClientInstance.getRetrofitInstance()
-                .create(Api.class)
-                .getBestSellerList()
-                .enqueue(new Callback<List<Product>>() {
-                    @Override
-                    public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
-                        if (response.isSuccessful()) {
-                            mBestSellerProducts = response.body();
-
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Product>> call, Throwable t) {
-                    }
-                });
     }
 
     public List<Product> getmRecentProducts() {
@@ -85,5 +32,17 @@ public class ProductList {
             ourInstance = new ProductList();
         }
         return ourInstance;
+    }
+
+    public void setRecentProducts(List<Product> recentProducts) {
+        mRecentProducts = recentProducts;
+    }
+
+    public void setBestSellerProducts(List<Product> bestSellerProducts) {
+        mBestSellerProducts = bestSellerProducts;
+    }
+
+    public void setPopularProducts(List<Product> popularProducts) {
+        mPopularProducts = popularProducts;
     }
 }
