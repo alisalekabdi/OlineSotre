@@ -48,7 +48,7 @@
                     android:layout_marginBottom="2dp"
                     android:gravity="left|right|center"
                     android:paddingLeft="8dp"
-                    android:text="Sign in"
+                    android:text=""
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     android:textSize="20sp"
@@ -81,6 +81,26 @@
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout">
 
         <EditText
+            android:id="@+id/add_user_last_name"
+            android:layout_width="12dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="نام خانوادگی"
+            android:inputType="textPersonName"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/add_user_first_name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <EditText
             android:id="@+id/add_user_first_name"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -90,7 +110,7 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Name"
+            android:hint="نام"
             android:inputType="textPersonName"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -100,25 +120,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0" />
 
-        <EditText
-            android:id="@+id/add_user_last_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="LastName"
-            android:inputType="textPersonName"
-            android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/add_user_first_name"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
     </LinearLayout>
 
     <LinearLayout
@@ -137,23 +138,6 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <EditText
-            android:id="@+id/add_user_name"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="UserName"
-            android:textSize="12sp"
-            app:layout_constraintEnd_toStartOf="@+id/add_user_email"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/add_user_first_name" />
-
-        <EditText
             android:id="@+id/add_user_email"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -163,11 +147,29 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="1"
             android:ems="10"
-            android:hint="Email"
+            android:hint="ایمیل"
             android:inputType="textEmailAddress"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/add_user_name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:hint="نام کاربری"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@+id/add_user_email"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/add_user_first_name" />
+
     </LinearLayout>
 
     <EditText
@@ -180,8 +182,8 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
+        android:hint="رمز"
+        android:inputType="textVisiblePassword"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
@@ -193,12 +195,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="8dp"
         android:background="@color/design_default_color_primary_dark"
-        android:text="Register"
+        android:text="ثبت نام"
         android:textAllCaps="true"
         android:textColor="@android:color/white"
         android:textSize="18sp"

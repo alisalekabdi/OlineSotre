@@ -8,7 +8,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">تنظیمات</string>
-    <string name="search">Search</string>
+    <string name="action_register">ثبت نام</string>
+    <string name="search">جستجو</string>
     <string name="basket">سبد خرید</string>
     <string name="title_activity_splash">SplashActivity</string>
     <string name="title_activity_search_product">SearchProductActivity</string>

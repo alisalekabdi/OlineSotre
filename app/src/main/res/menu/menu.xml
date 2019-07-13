@@ -41,15 +41,16 @@
     </group>
     <group android:checkableBehavior="single"
         android:id="@+id/gr3">
-        <item
-            android:id="@+id/registered_menu_item"
-            android:title="@string/action_settings"
-            android:icon="@drawable/ic-registration"
-            />
+
         <item
             android:id="@+id/settings"
             android:title="@string/action_settings"
             android:icon="@drawable/ic_setting"
+            />
+        <item
+            android:id="@+id/registered_menu_item"
+            android:title="@string/action_register"
+            android:icon="@drawable/ic_registration"
             />
         <item
             android:id="@+id/about_market"

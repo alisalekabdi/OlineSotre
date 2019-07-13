@@ -225,6 +225,10 @@ public class HomeActivity extends AppCompatActivity
                 Intent intent5=SettingActivity.newIntent(this);
                 startActivity(intent5);
                 break;
+            case R.id.registered_menu_item:
+                Intent intent6=RegisterCustActivity.newIntent(this);
+                startActivity(intent6);
+                break;
         }
         drawer.closeDrawer(GravityCompat.START);
         return true;
