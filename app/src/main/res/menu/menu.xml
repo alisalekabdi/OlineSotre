@@ -42,6 +42,11 @@
     <group android:checkableBehavior="single"
         android:id="@+id/gr3">
         <item
+            android:id="@+id/registered_menu_item"
+            android:title="@string/action_settings"
+            android:icon="@drawable/ic-registration"
+            />
+        <item
             android:id="@+id/settings"
             android:title="@string/action_settings"
             android:icon="@drawable/ic_setting"
