@@ -17,25 +17,25 @@
 
     <string-array name="filter_by_color">
 
-        <item>None</item>
-        <item>Black</item>
-        <item>White</item>
-        <item>Silver</item>
-        <item>Green</item>
-        <item>Yellow</item>
-        <item>Gray</item>
-        <item>Red</item>
-        <item>Blue</item>
+        <item>هیچ کدام</item>
+        <item>مشکی</item>
+        <item>سفید</item>
+        <item>نقره ای</item>
+        <item>سبز</item>
+        <item>زرد</item>
+        <item>خاکستری</item>
+        <item>قرمز</item>
+        <item>آبی</item>
 
     </string-array>
 
     <string-array name="sort_product">
 
-        <item>None</item>
-        <item>Best Seller</item>
-        <item>High to low price</item>
-        <item>low to high price</item>
-        <item>Newest</item>
+        <item>هیچ کدام</item>
+        <item>پرفروش ترین</item>
+        <item>جدیدترین</item>
+        <item>بیشترین به کمترین قیمت</item>
+        <item>از کمترین به بیشترین فیمت</item>
 
     </string-array>
 
