@@ -84,7 +84,6 @@ public class ProductInfFragment extends Fragment {
         mCmBtn=view.findViewById(R.id.cm_btn);
         mAttributeBtn=view.findViewById(R.id.attribute_btn);
         mDescription.setMaxLines(5);
-        mTableRow = view.findViewById(R.id.attribute_container_fragment_pro_info);
 
     }
 
@@ -181,25 +180,25 @@ public class ProductInfFragment extends Fragment {
                             mDescription.setText(product.getDescription());
 
                                                 mAttributes = product.getAttributes();
-                                                Log.e("alisalek", "onResponse: " + mAttributes.size());
-                                                if (mAttributes != null) {
-                                                    for (int i = 0; i < mAttributes.size(); i++) {
-                                                        TableRow tableRow = new TableRow(getActivity());
-                                                        TextView column2 = new TextView(getActivity());
-                                                        TextView column1 = new TextView(getActivity());
-
-                                                        column1.setPadding(8, 8, 8, 8);
-                                                        column2.setPadding(8, 8, 8, 8);
-                                                        column1.setTextSize(10);
-                                                        column2.setTextSize(10);
-                                                        column1.setText("\t" + "\t" + mAttributes.get(i).getName());
-                                                        column2.setText(mAttributes.get(i).getOptions().get(0));
-                                                        tableRow.addView(column2);
-                                                        tableRow.addView(column1);
-                                                        mTableRow.addView(tableRow);
-
-                                                    }
-                                                }
+//                                                Log.e("alisalek", "onResponse: " + mAttributes.size());
+//                                                if (mAttributes != null) {
+//                                                    for (int i = 0; i < mAttributes.size(); i++) {
+//                                                        TableRow tableRow = new TableRow(getActivity());
+//                                                        TextView column2 = new TextView(getActivity());
+//                                                        TextView column1 = new TextView(getActivity());
+//
+//                                                        column1.setPadding(8, 8, 8, 8);
+//                                                        column2.setPadding(8, 8, 8, 8);
+//                                                        column1.setTextSize(10);
+//                                                        column2.setTextSize(10);
+//                                                        column1.setText("\t" + "\t" + mAttributes.get(i).getName());
+//                                                        column2.setText(mAttributes.get(i).getOptions().get(0));
+//                                                        tableRow.addView(column2);
+//                                                        tableRow.addView(column1);
+//                                                        mTableRow.addView(tableRow);
+//
+//                                                    }
+//                                                }
 
 
 

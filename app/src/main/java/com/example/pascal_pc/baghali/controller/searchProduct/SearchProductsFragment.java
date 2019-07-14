@@ -1,6 +1,7 @@
 package com.example.pascal_pc.baghali.controller.searchProduct;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +43,8 @@ public class SearchProductsFragment extends Fragment {
     private List<Product> mProductList = new ArrayList<>();
     private List<Product> mAuxiliaryProductList;
     private List<Product> productList2 = new ArrayList<>();
+    private ProgressDialog progressDialog;
+
     private boolean mAttributeSelected = false;
 
     public SearchProductsFragment() {
@@ -83,6 +86,12 @@ public class SearchProductsFragment extends Fragment {
             public boolean onQueryTextSubmit(String query) {
                 String searchString = query;
 
+                progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setTitle("Loading");
+                progressDialog.setMessage("Wait while loading...");
+                progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                progressDialog.show();
+
                 RetrofitClientInstance.getRetrofitInstance()
                         .create(Api.class)
                         .getProductWithSearch(searchString)
@@ -101,6 +110,7 @@ public class SearchProductsFragment extends Fragment {
 
                             @Override
                             public void onFailure(Call<List<Product>> call, Throwable t) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), t.getMessage(), Toast.LENGTH_LONG).show();
 
                             }
@@ -317,6 +327,7 @@ public class SearchProductsFragment extends Fragment {
         }
 
         public void bind(Product product) {
+            progressDialog.dismiss();
             mProduct = product;
             mTitle.setText(mProduct.getName());
             mPrice.setText(mProduct.getPrice());
