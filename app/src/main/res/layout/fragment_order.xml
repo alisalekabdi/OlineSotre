@@ -101,11 +101,12 @@
                     android:layout_height="match_parent"
                     android:layout_gravity="center"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="2dp"
                     android:layout_marginRight="36dp"
                     android:layout_marginBottom="2dp"
                     android:gravity="left|right|center"
                     android:paddingLeft="8dp"
-                    android:text="Finalize purchase"
+                    android:text="ثبت سفارش"
                     android:textAllCaps="false"
                     android:textColor="#fff"
                     android:textSize="20sp"
@@ -196,25 +197,11 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout8">
 
         <android.support.design.widget.TextInputLayout
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="32dp"
-        android:layout_weight="1"
-        android:hint="Password"
-        android:layoutDirection="rtl"
-        tools:layout_editor_absoluteX="226dp"
-        tools:layout_editor_absoluteY="129dp">
-
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="32dp"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="32dp"
             android:layout_weight="1"
             android:hint="آدرس"
             android:layoutDirection="rtl"
@@ -236,11 +223,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
         android:layout_marginTop="12dp"
-        android:text="Use coupon"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:text="استفاده از کوپن"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout9"
         tools:ignore="MissingConstraints" />
 
@@ -261,6 +248,32 @@
         app:layout_constraintVertical_bias="0.0">
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/final_cost_after_coupon_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="32dp"
+            android:layout_weight="1"
+            android:hint="جمع کل خرید بعد از تخفبف"
+            android:layoutDirection="rtl"
+            app:layout_constraintBottom_toTopOf="@+id/confrim_order_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/use_coupon_check_box"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="MissingConstraints">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/final_cost_after_coupon"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="10sp" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:id="@+id/coupon_layout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="0dp"
@@ -268,8 +281,8 @@
             android:layout_gravity="center"
             android:layout_weight="1"
             android:hint="کد کوپن"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="8dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="32dp"
             android:layoutDirection="rtl"
             app:layout_constraintBottom_toTopOf="@+id/confrim_order_btn"
             app:layout_constraintEnd_toEndOf="parent"
@@ -288,40 +301,16 @@
 
         </android.support.design.widget.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/final_cost_after_coupon_layout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:hint="جمع کل خرید بعد از تخفبف"
-            android:layoutDirection="rtl"
-            android:layout_marginRight="32dp"
-            app:layout_constraintBottom_toTopOf="@+id/confrim_order_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/use_coupon_check_box"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="MissingConstraints">
-
-            <android.support.design.widget.TextInputEditText
-                android:id="@+id/final_cost_after_coupon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="10sp" />
-
-        </android.support.design.widget.TextInputLayout>
-
     </LinearLayout>
+
     <TextView
         android:id="@+id/confrim_order_btn"
         android:layout_width="0dp"
         android:layout_height="52dp"
+        android:layout_margin="8dp"
         android:background="@color/design_default_color_primary_dark"
         android:gravity="center"
-        android:text="Confirm"
+        android:text="ثبت سفارش"
         android:textColor="#ffffff"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"

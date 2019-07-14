@@ -81,13 +81,15 @@
             android:paddingRight="16dp"
             android:text="TextView"
             android:textColor="@color/SlateGray" />
+
         <TextView
             android:id="@+id/textView12"
             android:layout_width="0dp"
             android:layout_height="match_parent"
+            android:layout_marginRight="2dp"
             android:layout_weight="1"
-            android:padding="8dp"
             android:gravity="right|center"
+            android:padding="8dp"
             android:paddingLeft="16dp"
             android:text="جمع کل خرید"
             android:textColor="@color/Green"
@@ -126,7 +128,9 @@
         android:id="@+id/finalize_your_purchase_btn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="8dp"
         android:background="@color/Green"
+        android:padding="4dp"
         android:text="خرید خود را نهایی کتید"
         android:textAllCaps="false"
         android:textColor="@color/White"

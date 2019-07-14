@@ -6,8 +6,9 @@
     tools:context=".controller.viewPager.ViewPagerFragment">
 
     <ImageView
+        android:id="@+id/special_img_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/special_img_view"/>
+        android:scaleType="fitXY" />
 
 </FrameLayout>

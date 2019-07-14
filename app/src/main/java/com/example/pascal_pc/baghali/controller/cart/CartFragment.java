@@ -1,6 +1,7 @@
 package com.example.pascal_pc.baghali.controller.cart;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -44,6 +45,7 @@ public class CartFragment extends Fragment {
     private RecyclerView mCartRV;
     private TextView mTotalCost;
     private CartAdapter mAdapter;
+    private ProgressDialog progressDialog;
 
     public static CartFragment newInstance() {
 
@@ -65,6 +67,12 @@ public class CartFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.cart_view, container, false);
 
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Wait while loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
         mTotalCost = view.findViewById(R.id.total_cost_tv);
         setTotalPRice();
         mFinalizePurchaseBtn = view.findViewById(R.id.finalize_your_purchase_btn);
@@ -80,7 +88,7 @@ public class CartFragment extends Fragment {
             }
         });
         mCartRV = view.findViewById(R.id.cart_item_rv);
-        Toast.makeText(getActivity(), CartLab.getInstance().getCarts().size() + "", Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getActivity(), CartLab.getInstance().getCarts().size() + "", Toast.LENGTH_SHORT).show();
         mAdapter = new CartAdapter(CartLab.getInstance().getCarts());
         mCartRV.setLayoutManager(new
                 LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
@@ -144,6 +152,13 @@ public class CartFragment extends Fragment {
 
         public void Bind(Cart cart) {
             mCart = cart;
+            // Set up progress before call
+//            final ProgressDialog progressDialog;
+//            progressDialog = new ProgressDialog(getActivity());
+//            progressDialog.setMessage("loading....");
+//            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            // show it
+            progressDialog.show();
             mCountSpinner.setSelection(mCart.getMProductCount() - 1);
             Integer mProductId = cart.getMProductId();
             RetrofitClientInstance.getRetrofitInstance()
@@ -160,12 +175,13 @@ public class CartFragment extends Fragment {
                                 mTotalCost.setText(mCart.getMPrice() * mCart.getMProductCount() + "" + "ریال ");
 
                             }
+                            progressDialog.dismiss();
 
                         }
 
                         @Override
                         public void onFailure(Call<Product> call, Throwable t) {
-
+                            progressDialog.dismiss();
                         }
                     });
         }

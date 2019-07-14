@@ -120,7 +120,7 @@ public class ProductListViewFragment extends Fragment {
 
             mProduct = product;
             mProductItemTitleTv.setText(mProduct.getName());
-            mProductItemPriceTv.setText(mProduct.getPrice() + " Rial");
+            mProductItemPriceTv.setText(" "+mProduct.getPrice() + "ريال  ");
             if (mProduct.getImages() != null && mProduct.getImages().size() > 0) {
                 Picasso.get().load(product.getImages().get(0).getPath()).into(mProductItemImgView);
             }

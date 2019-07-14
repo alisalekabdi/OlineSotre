@@ -10,8 +10,9 @@
         android:id="@+id/entrance_animation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/DarkRed"
         app:lottie_autoPlay="true"
-        app:lottie_fileName="circleloading.json"
+        app:lottie_fileName="splash.json"
         app:lottie_loop="true" />
 
     <TextView
