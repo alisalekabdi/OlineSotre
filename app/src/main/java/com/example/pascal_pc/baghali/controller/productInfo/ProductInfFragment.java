@@ -1,17 +1,21 @@
 package com.example.pascal_pc.baghali.controller.productInfo;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +26,7 @@ import com.example.pascal_pc.baghali.R;
 import com.example.pascal_pc.baghali.controller.productInfo.cmAndAttribute.AttributeActivity;
 import com.example.pascal_pc.baghali.controller.productInfo.cmAndAttribute.CommentActivity;
 import com.example.pascal_pc.baghali.dataBase.CartLab;
+import com.example.pascal_pc.baghali.model.product.Attributes;
 import com.example.pascal_pc.baghali.model.product.Image;
 import com.example.pascal_pc.baghali.model.product.Product;
 import com.example.pascal_pc.baghali.model.dataBaseModel.Cart;
@@ -49,6 +54,9 @@ public class ProductInfFragment extends Fragment {
     private Product product;
     private Button mCmBtn,mAttributeBtn;
     private OverflowPagerIndicator mIndicator;
+    private List<Attributes> mAttributes;
+    private TableLayout mTableRow;
+    private ProgressDialog progressDialog;
 
 
     public static ProductInfFragment newInstance(int productid) {
@@ -76,6 +84,7 @@ public class ProductInfFragment extends Fragment {
         mCmBtn=view.findViewById(R.id.cm_btn);
         mAttributeBtn=view.findViewById(R.id.attribute_btn);
         mDescription.setMaxLines(5);
+        mTableRow = view.findViewById(R.id.attribute_container_fragment_pro_info);
 
     }
 
@@ -91,6 +100,13 @@ public class ProductInfFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_product_info, container, false);
+
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Wait while loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
         findItem(view);
 
         mCmBtn.setOnClickListener(new View.OnClickListener() {
@@ -159,16 +175,41 @@ public class ProductInfFragment extends Fragment {
                                 mAdapter.notifyDataSetChanged();
                             }
                             mTitle.setText(product.getName());
-                            mPrice.setText(product.getPrice()+" Rial");
+                            mPrice.setText(product.getPrice()+" ريال");
 //                            mColorTv.setText("Color: "+product.get);
 
                             mDescription.setText(product.getDescription());
+
+                                                mAttributes = product.getAttributes();
+                                                Log.e("alisalek", "onResponse: " + mAttributes.size());
+                                                if (mAttributes != null) {
+                                                    for (int i = 0; i < mAttributes.size(); i++) {
+                                                        TableRow tableRow = new TableRow(getActivity());
+                                                        TextView column2 = new TextView(getActivity());
+                                                        TextView column1 = new TextView(getActivity());
+
+                                                        column1.setPadding(8, 8, 8, 8);
+                                                        column2.setPadding(8, 8, 8, 8);
+                                                        column1.setTextSize(10);
+                                                        column2.setTextSize(10);
+                                                        column1.setText("\t" + "\t" + mAttributes.get(i).getName());
+                                                        column2.setText(mAttributes.get(i).getOptions().get(0));
+                                                        tableRow.addView(column2);
+                                                        tableRow.addView(column1);
+                                                        mTableRow.addView(tableRow);
+
+                                                    }
+                                                }
+
+
+
 
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Product> call, Throwable t) {
+                        progressDialog.dismiss();
                         final Snackbar snackbar = Snackbar.make(view,
                                 getResources().getString(R.string.failed_message), Snackbar.LENGTH_INDEFINITE);
                         snackbar.setAction("OK", new View.OnClickListener() {
@@ -196,6 +237,7 @@ public class ProductInfFragment extends Fragment {
 
         public void bind(Image image) {
             Picasso.get().load(image.getPath()).into(mProductImageView);
+            progressDialog.dismiss();
         }
     }
 

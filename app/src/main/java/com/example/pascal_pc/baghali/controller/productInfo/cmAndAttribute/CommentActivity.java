@@ -1,5 +1,6 @@
 package com.example.pascal_pc.baghali.controller.productInfo.cmAndAttribute;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -51,11 +52,18 @@ public class CommentActivity extends AppCompatActivity {
     private int mProductId;
     private Product mProduct;
     private CmAdapter mAdapter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Wait while loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
 
         mProductId = getIntent().getIntExtra(EXTRA_CM_PRODUCT_ID, 87);
         findItem();
@@ -78,7 +86,7 @@ public class CommentActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<List<Review>> call, Throwable t) {
-
+                        progressDialog.dismiss();
                     }
                 });
 
@@ -173,6 +181,7 @@ public class CommentActivity extends AppCompatActivity {
         }
 
         public void bind(Review cm) {
+            progressDialog.dismiss();
             mCmViewer.setText(cm.getReviewer_name());
             String review=cm.getReview();
             if (review.length()>0){

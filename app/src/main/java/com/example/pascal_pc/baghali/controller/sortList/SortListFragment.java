@@ -1,6 +1,7 @@
 package com.example.pascal_pc.baghali.controller.sortList;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -47,6 +48,7 @@ public class SortListFragment extends Fragment {
     private RecyclerView mRecyclerView;
     private TextView mTilteTV;
     private CatAdapter adapter;
+    private ProgressDialog progressDialog;
     private int mReqId;
 
     public SortListFragment() {
@@ -64,6 +66,11 @@ public class SortListFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_sort_list, container, false);
+        progressDialog = new ProgressDialog(getActivity());
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Wait while loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
         mRecyclerView = view.findViewById(R.id.sort_list_recycler_view);
         mRecyclerView.setLayoutManager(new
                 LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
@@ -85,10 +92,12 @@ public class SortListFragment extends Fragment {
                                     adapter.setProducts(response.body());
                                     adapter.notifyDataSetChanged();
                                 }
+                                progressDialog.dismiss();
                             }
 
                             @Override
                             public void onFailure(Call<List<Product>> call, Throwable t) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), "Request is failed", Toast.LENGTH_SHORT).show();
                             }
                         });
@@ -108,11 +117,14 @@ public class SortListFragment extends Fragment {
                                     adapter.setProducts(response.body());
                                     adapter.notifyDataSetChanged();
                                 }
+                                progressDialog.dismiss();
                             }
 
                             @Override
                             public void onFailure(Call<List<Product>> call, Throwable t) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), "Request is failed", Toast.LENGTH_SHORT).show();
+
                             }
                         });
                 break;
@@ -131,10 +143,12 @@ public class SortListFragment extends Fragment {
                                     adapter.setProducts(response.body());
                                     adapter.notifyDataSetChanged();
                                 }
+                                progressDialog.dismiss();
                             }
 
                             @Override
                             public void onFailure(Call<List<Product>> call, Throwable t) {
+                                progressDialog.dismiss();
                                 Toast.makeText(getActivity(), "Request is failed", Toast.LENGTH_SHORT).show();
                             }
                         });

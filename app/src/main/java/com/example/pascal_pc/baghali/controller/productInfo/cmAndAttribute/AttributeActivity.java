@@ -1,5 +1,6 @@
 package com.example.pascal_pc.baghali.controller.productInfo.cmAndAttribute;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -39,11 +40,19 @@ public class AttributeActivity extends AppCompatActivity {
     private Product mProduct;
     private List<Attributes> mAttributes;
     private TableLayout mTableRow;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_attribute);
+
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Wait while loading...");
+        progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDialog.show();
+
 
         mProductId = getIntent().getIntExtra(EXTRA_PRODUCT_ID, 87);
         mNameTv = findViewById(R.id.attr_product_name);
@@ -59,10 +68,10 @@ public class AttributeActivity extends AppCompatActivity {
                             mProduct = response.body();
                             mNameTv.setText(mProduct.getName());
                             mAttributes = mProduct.getAttributes();
-                            Log.e("alisalek", "onResponse: "+mAttributes.size());
+                            Log.e("alisalek", "onResponse: " + mAttributes.size());
                             if (mAttributes != null) {
-                                for (int i = 0; i <mAttributes.size(); i++) {
-                                    TableRow tableRow=new TableRow(AttributeActivity.this);
+                                for (int i = 0; i < mAttributes.size(); i++) {
+                                    TableRow tableRow = new TableRow(AttributeActivity.this);
                                     TextView column2 = new TextView(AttributeActivity.this);
                                     TextView column1 = new TextView(AttributeActivity.this);
 
@@ -70,13 +79,14 @@ public class AttributeActivity extends AppCompatActivity {
                                     column2.setPadding(8, 8, 8, 8);
                                     column1.setTextSize(10);
                                     column2.setTextSize(10);
-                                    column1.setText("\t"+"\t"+mAttributes.get(i).getName());
+                                    column1.setText("\t" + "\t" + mAttributes.get(i).getName());
                                     column2.setText(mAttributes.get(i).getOptions().get(0));
                                     tableRow.addView(column2);
                                     tableRow.addView(column1);
                                     mTableRow.addView(tableRow);
 
                                 }
+                                progressDialog.dismiss();
                             }
                         } else
                             Toast.makeText(AttributeActivity.this, "Connection is failed", Toast.LENGTH_SHORT).show();
@@ -84,7 +94,7 @@ public class AttributeActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Product> call, Throwable t) {
-
+                        progressDialog.dismiss();
                     }
                 });
 
